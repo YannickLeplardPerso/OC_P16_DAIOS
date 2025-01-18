@@ -6,16 +6,29 @@
 //
 
 import SwiftUI
+import Firebase
 
 @main
 struct MediStockApp: App {
-    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-    var sessionStore = SessionStore()
+    @StateObject var sessionStore = SessionStore()
+    @StateObject var medicineStore = MedicineStockViewModel()
+    
+    init() {
+        FirebaseApp.configure()
+        try? Auth.auth().signOut()
+    }
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environmentObject(sessionStore)
+            Group {
+                if sessionStore.session != nil {
+                    MainTabView()
+                } else {
+                    LoginView()
+                }
+            }
+            .environmentObject(sessionStore)
+            .environmentObject(medicineStore)
         }
     }
 }

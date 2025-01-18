@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct MedicineListView: View {
-    @ObservedObject var viewModel = MedicineStockViewModel()
+    @EnvironmentObject var viewModel: MedicineStockViewModel
     var aisle: String
 
     var body: some View {

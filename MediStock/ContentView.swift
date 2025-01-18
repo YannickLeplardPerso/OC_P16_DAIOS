@@ -11,9 +11,9 @@ struct ContentView: View {
                 LoginView()
             }
         }
-        .onAppear {
-            session.listen()
-        }
+//        .onAppear {
+//            session.listen()
+//        }
     }
 }
 

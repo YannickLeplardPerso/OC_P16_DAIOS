@@ -2,7 +2,7 @@ import SwiftUI
 
 struct MedicineDetailView: View {
     @State var medicine: Medicine
-    @ObservedObject var viewModel = MedicineStockViewModel()
+    @EnvironmentObject var viewModel: MedicineStockViewModel
     @EnvironmentObject var session: SessionStore
 
     var body: some View {
@@ -31,12 +31,9 @@ struct MedicineDetailView: View {
         .onAppear {
             viewModel.fetchHistory(for: medicine)
         }
-//            .onChange(of: medicine) { _ in
-//                viewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
-//            }
-            .onChange(of: medicine) {
-                viewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
-            }
+        .onChange(of: medicine) {
+            viewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
+        }
     }
 }
 
@@ -127,7 +124,8 @@ extension MedicineDetailView {
 struct MedicineDetailView_Previews: PreviewProvider {
     static var previews: some View {
         let sampleMedicine = Medicine(name: "Sample", stock: 10, aisle: "Aisle 1")
-        let sampleViewModel = MedicineStockViewModel()
-        MedicineDetailView(medicine: sampleMedicine, viewModel: sampleViewModel).environmentObject(SessionStore())
+        MedicineDetailView(medicine: sampleMedicine)
+            .environmentObject(MedicineStockViewModel())
+            .environmentObject(SessionStore())
     }
 }
