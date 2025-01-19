@@ -1,5 +1,7 @@
 import SwiftUI
 
+
+
 struct MedicineDetailView: View {
     @State var medicine: Medicine
     @EnvironmentObject var viewModel: MedicineStockViewModel

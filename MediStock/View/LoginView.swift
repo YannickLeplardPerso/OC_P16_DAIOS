@@ -1,5 +1,7 @@
 import SwiftUI
 
+
+
 struct LoginView: View {
     @State private var email = ""
     @State private var password = ""
@@ -85,6 +87,7 @@ struct LoginView: View {
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView().environmentObject(SessionStore())
+        LoginView()
+            .environmentObject(SessionStore())
     }
 }

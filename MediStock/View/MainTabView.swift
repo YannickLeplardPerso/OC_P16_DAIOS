@@ -1,5 +1,7 @@
 import SwiftUI
 
+
+
 struct MainTabView: View {
     @EnvironmentObject var session: SessionStore
     @EnvironmentObject var medicineStore: MedicineStockViewModel
@@ -41,8 +43,12 @@ struct MainTabView: View {
     }
 }
 
+
+
 struct MainTabView_Previews: PreviewProvider {
     static var previews: some View {
         MainTabView()
+            .environmentObject(SessionStore())
+            .environmentObject(MedicineStockViewModel())
     }
 }

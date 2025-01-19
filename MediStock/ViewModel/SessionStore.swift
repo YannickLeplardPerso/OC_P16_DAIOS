@@ -4,17 +4,6 @@ import Firebase
 class SessionStore: ObservableObject {
     @Published var session: User?
     @Published var error: MedicError?
-//    var handle: AuthStateDidChangeListenerHandle?
-
-//    func listen() {
-//        handle = Auth.auth().addStateDidChangeListener { (auth, user) in
-//            if let user = user {
-//                self.session = User(uid: user.uid, email: user.email)
-//            } else {
-//                self.session = nil
-//            }
-//        }
-//    }
 
     func signUp(email: String, password: String) {
         guard !email.isEmpty else {
@@ -74,12 +63,6 @@ class SessionStore: ObservableObject {
             self.error = .signOutFailed
         }
     }
-
-//    func unbind() {
-//        if let handle = handle {
-//            Auth.auth().removeStateDidChangeListener(handle)
-//        }
-//    }
 }
 
 struct User {

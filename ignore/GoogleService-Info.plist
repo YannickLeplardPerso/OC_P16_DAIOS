@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyCcoBVB6PUr0l0IteAif4EDuxeRSW8wKBc</string>
+	<key>GCM_SENDER_ID</key>
+	<string>830525218034</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.rebonnte.MediStock</string>
+	<key>PROJECT_ID</key>
+	<string>gestionstockmedicaments-b17fd</string>
+	<key>STORAGE_BUCKET</key>
+	<string>gestionstockmedicaments-b17fd.firebasestorage.app</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:830525218034:ios:4a6fabf15848b487d3446b</string>
+</dict>
+</plist>
