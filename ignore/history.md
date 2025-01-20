@@ -1,7 +1,16 @@
+en cours
+build 6 dev :
+- amélioration de l'UI de MedicineListView et MedicineDetailView
+- Revue de la gestion des stocks dans le MedicineStockViewModel et la MedicineDetailView
+- Gestion des erreurs de MedicineStockViewModel
+- Revue du projet Firebase : nouvelle clé API avec restrictions
+- Dans MedicineStockViewModel, correction fetchAisles pour avoir le bon nombre de medicines immédiatement
+
+
+
+
 build 5 dev :
 - amélioration de l'UI de AisleListView et AllMedicinesView
-
-
 
 build 4 dev :
 - Simplification : supression de ContentView 

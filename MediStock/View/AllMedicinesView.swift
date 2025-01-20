@@ -14,7 +14,7 @@ struct AllMedicinesView: View {
                 HStack {
                     Image(systemName: "magnifyingglass")
                         .foregroundColor(.secondary)
-                    TextField("Rechercher un médicament", text: $filterText)
+                    TextField("Search medicine", text: $filterText)
                 }
                 .padding()
                 .background(Color(.tertiarySystemBackground))
@@ -25,9 +25,9 @@ struct AllMedicinesView: View {
                 )
                 .padding(.horizontal)
                 
-                Picker("Trier par", selection: $sortOption) {
-                    Text("Aucun").tag(SortOption.none)
-                    Text("Nom").tag(SortOption.name)
+                Picker("Sort by", selection: $sortOption) {
+                    Text("None").tag(SortOption.none)
+                    Text("Name").tag(SortOption.name)
                     Text("Stock").tag(SortOption.stock)
                 }
                 .pickerStyle(SegmentedPickerStyle())
@@ -36,10 +36,9 @@ struct AllMedicinesView: View {
             .padding(.vertical)
             .background(Color(.systemGroupedBackground))
             
-            // Liste des médicaments
             List {
                 ForEach(filteredAndSortedMedicines, id: \.id) { medicine in
-                    NavigationLink(destination: MedicineDetailView(medicine: medicine)) {
+                    NavigationLink(destination: MedicineDetailView(medicineId: medicine.id ?? "")) {
                         HStack {
                             Image(systemName: "pills.fill")
                                 .foregroundColor(.accentColor)
@@ -113,74 +112,3 @@ struct AllMedicinesView_Previews: PreviewProvider {
         }
     }
 }
-
-//struct AllMedicinesView: View {
-//    @EnvironmentObject var viewModel: MedicineStockViewModel
-//    @State private var filterText: String = ""
-//    @State private var sortOption: SortOption = .none
-//
-//    var body: some View {
-//        NavigationView {
-//            VStack {
-//                HStack {
-//                    TextField("Filter by name", text: $filterText)
-//                        .textFieldStyle(RoundedBorderTextFieldStyle())
-//                        .padding(.leading, 10)
-//                    
-//                    Spacer()
-//
-//                    Picker("Sort by", selection: $sortOption) {
-//                        Text("None").tag(SortOption.none)
-//                        Text("Name").tag(SortOption.name)
-//                        Text("Stock").tag(SortOption.stock)
-//                    }
-//                    .pickerStyle(MenuPickerStyle())
-//                    .padding(.trailing, 10)
-//                }
-//                .padding(.top, 10)
-//                
-//                List {
-//                    ForEach(filteredAndSortedMedicines, id: \.id) { medicine in
-//                        NavigationLink(destination: MedicineDetailView(medicine: medicine)) {
-//                            VStack(alignment: .leading) {
-//                                Text(medicine.name)
-//                                    .font(.headline)
-//                                Text("Stock: \(medicine.stock)")
-//                                    .font(.subheadline)
-//                            }
-//                        }
-//                    }
-//                }
-//                .navigationBarTitle("All Medicines")
-//            }
-//            .navigationBarTitle("All Medicines")
-//            .onAppear {
-//                viewModel.fetchMedicines()
-//            }
-//        }
-//        .onAppear {
-//            viewModel.fetchMedicines()
-//        }
-//    }
-//    
-//    var filteredAndSortedMedicines: [Medicine] {
-//        var medicines = viewModel.medicines
-//
-//        // Filtrage
-//        if !filterText.isEmpty {
-//            medicines = medicines.filter { $0.name.lowercased().contains(filterText.lowercased()) }
-//        }
-//
-//        // Tri
-//        switch sortOption {
-//        case .name:
-//            medicines.sort { $0.name.lowercased() < $1.name.lowercased() }
-//        case .stock:
-//            medicines.sort { $0.stock < $1.stock }
-//        case .none:
-//            break
-//        }
-//
-//        return medicines
-//    }
-//}

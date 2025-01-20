@@ -19,7 +19,17 @@ enum MedicError: LocalizedError, Identifiable {
     case weakPassword
     case signUpFailed
     case signOutFailed
-//    case userNotFound
+    case updateStockError
+    
+    case fetchMedicinesError
+    case fetchAislesError
+    case fetchHistoryError
+    case addMedicineError
+    case deleteMedicineError
+    case updateMedicineError
+    case addHistoryError
+    case medicineNotFound
+    case invalidMedicineId
     
     
     var id: String { localizedDescription }  // pour les alertes
@@ -40,6 +50,27 @@ enum MedicError: LocalizedError, Identifiable {
             return "sign up failed"
         case .signOutFailed:
             return "sign out failed"
+        case .updateStockError:
+            return "Failed to update stock. Please try again."
+            
+        case .fetchMedicinesError:
+            return "Failed to fetch medicines"
+        case .fetchAislesError:
+            return "Failed to fetch aisles"
+        case .fetchHistoryError:
+            return "Failed to fetch history"
+        case .addMedicineError:
+            return "Failed to add medicine"
+        case .deleteMedicineError:
+            return "Failed to delete medicine"
+        case .updateMedicineError:
+            return "Failed to update medicine"
+        case .addHistoryError:
+            return "Failed to add history entry"
+        case .medicineNotFound:
+            return "Medicine not found"
+        case .invalidMedicineId:
+            return "Invalid medicine ID"
         }
     }
 }
