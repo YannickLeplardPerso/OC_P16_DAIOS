@@ -11,7 +11,6 @@ struct MedicineListView: View {
         List {
             ForEach(viewModel.medicines.filter { $0.aisle == aisle }, id: \.id) { medicine in
                 NavigationLink(destination: MedicineDetailView(medicineId: medicine.id ?? "")) {
-//                NavigationLink(destination: MedicineDetailView(medicine: medicine)) {
                     HStack {
                         Image(systemName: "pills.fill")
                             .foregroundColor(.accentColor)

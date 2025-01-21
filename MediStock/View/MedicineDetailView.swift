@@ -14,7 +14,7 @@ struct MedicineDetailView: View {
    var body: some View {
        List {
            if let medicine = medicine {
-               // Information Section
+
                Section(header: Text("Information")) {
                    HStack {
                        Label("Name", systemImage: "character.cursor.ibeam")
@@ -31,7 +31,6 @@ struct MedicineDetailView: View {
                    }
                }
                
-               // Stock Management Section
                Section(header: Text("Stock Management")) {
                    HStack(spacing: 20) {
                        Button(action: {
@@ -43,6 +42,7 @@ struct MedicineDetailView: View {
                                .foregroundColor(.red)
                        }
                        .buttonStyle(BorderlessButtonStyle())
+                       .disabled(medicine.stock == 0)
                        
                        Spacer()
                        
@@ -64,7 +64,20 @@ struct MedicineDetailView: View {
                    .padding(.vertical, 4)
                }
                
-               // History Section
+               if medicine.stock == 0 {
+                   Section {
+                       Button(action: {
+                           viewModel.deleteMedicine(medicine, user: session.session?.uid ?? "")
+                       }) {
+                           HStack {
+                               Image(systemName: "trash")
+                               Text("Delete Medicine")
+                           }
+                           .foregroundColor(.red)
+                       }
+                   }
+               }
+               
                Section(header: Text("History")) {
                    if viewModel.history.isEmpty {
                        Text("No history available")

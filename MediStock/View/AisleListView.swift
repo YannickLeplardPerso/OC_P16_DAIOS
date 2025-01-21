@@ -33,6 +33,13 @@ struct AisleListView: View {
             viewModel.fetchAisles()
         }
         .background(Color(.systemGroupedBackground))
+        .alert(item: $viewModel.error) { error in
+            Alert(
+                title: Text("Error"),
+                message: Text(error.localizedDescription),
+                dismissButton: .default(Text("OK"))
+            )
+        }
     }
 }
 

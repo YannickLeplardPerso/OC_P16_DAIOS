@@ -16,7 +16,7 @@ struct LoginView: View {
                 .padding(.top, 60)
             Text("Gestion de stock médical")
                 .font(.subheadline)
-                .foregroundColor(.secondary)  // S'adapte automatiquement
+                .foregroundColor(.secondary)
                 .padding(.bottom, 40)
             
             VStack {
@@ -71,7 +71,7 @@ struct LoginView: View {
             Spacer()
         }
         .padding()
-        .background(Color(.systemGroupedBackground))  // S'adapte automatiquement
+        .background(Color(.systemGroupedBackground)) 
         .edgesIgnoringSafeArea(.all)
         .alert(item: $session.error) { error in
             Alert(

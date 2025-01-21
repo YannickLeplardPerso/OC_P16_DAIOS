@@ -1,13 +1,22 @@
 en cours
+build 7 dev :
+- Firestore : (ré)initialisation ?!
+- Gestion des erreurs dans les vues avec des alertes
+- Implémentation de la suppression d'un médicament dans MedicineDetailView avec fonction dans le view model : bouton - désactivé et bouton suppression ssi stock = 0
+
+
+
+
+
+
+
+
 build 6 dev :
 - amélioration de l'UI de MedicineListView et MedicineDetailView
 - Revue de la gestion des stocks dans le MedicineStockViewModel et la MedicineDetailView
 - Gestion des erreurs de MedicineStockViewModel
 - Revue du projet Firebase : nouvelle clé API avec restrictions
 - Dans MedicineStockViewModel, correction fetchAisles pour avoir le bon nombre de medicines immédiatement
-
-
-
 
 build 5 dev :
 - amélioration de l'UI de AisleListView et AllMedicinesView
