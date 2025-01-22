@@ -38,7 +38,7 @@ struct AllMedicinesView: View {
             
             List {
                 ForEach(filteredAndSortedMedicines, id: \.id) { medicine in
-                    NavigationLink(destination: MedicineDetailView(medicineId: medicine.id ?? "")) {
+                    NavigationLink(destination: MedicineDetailView(medicineId: medicine.id ?? "", sourceView: "Medicines")) {
                         HStack {
                             Image(systemName: "pills.fill")
                                 .foregroundColor(.accentColor)
@@ -65,9 +65,8 @@ struct AllMedicinesView: View {
             }
             .listStyle(InsetGroupedListStyle())
         }
-        .navigationTitle("Médicaments")
         .onAppear {
-            viewModel.fetchMedicines()
+            viewModel.fetchMedicinesAndAisles()
         }
         .background(Color(.systemGroupedBackground))
         .alert(item: $viewModel.error) { error in

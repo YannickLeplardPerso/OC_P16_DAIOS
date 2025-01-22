@@ -1,15 +1,11 @@
 en cours
+build 9 dev
+- correction bugs navigation et intitulé des boutons « back »
+- MedicineStockViewModel : création d’une fonction fetchMedicinesAndAisles à la place de fetchMedicines et fetchAisles
+
+
 build 8 dev
 - nouveau médicament : ajout fonction de création dans le view model et une sheet view pour la saisie
-
-
-todo = 
-correction bugs navigation
-history
-suppression dans liste
-
-
-
 
 build 7 dev :
 - Firestore : (ré)initialisation ?!

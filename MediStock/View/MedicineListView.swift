@@ -3,14 +3,14 @@ import SwiftUI
 
 
 struct MedicineListView: View {
+    @Environment(\.dismiss) var dismiss
     @EnvironmentObject var viewModel: MedicineStockViewModel
     var aisle: String
 
     var body: some View {
-        Text("")
         List {
             ForEach(viewModel.medicines.filter { $0.aisle == aisle }, id: \.id) { medicine in
-                NavigationLink(destination: MedicineDetailView(medicineId: medicine.id ?? "")) {
+                NavigationLink(destination: MedicineDetailView(medicineId: medicine.id ?? "", sourceView: aisle)) {
                     HStack {
                         Image(systemName: "pills.fill")
                             .foregroundColor(.accentColor)
@@ -30,9 +30,32 @@ struct MedicineListView: View {
             }
         }
         .listStyle(InsetGroupedListStyle())
-        .navigationBarTitle(aisle)
-        .onAppear {
-            viewModel.fetchMedicines()
+        .navigationBarBackButtonHidden(true)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button(action: { dismiss() }) {
+                    Image(systemName: "chevron.left")
+                    Text("Aisles")
+                }
+            }
+            ToolbarItem(placement: .principal) {
+                Text(aisle)
+            }
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button(action: {
+//                    showingAddSheet = true
+                }) {
+                    Image(systemName: "plus")
+                }
+            }
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button(action: {
+//                    session.signOut()
+                }) {
+                    Image(systemName: "rectangle.portrait.and.arrow.right")
+                        .foregroundColor(.red)
+                }
+            }
         }
         .background(Color(.systemGroupedBackground))
     }

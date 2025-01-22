@@ -28,9 +28,8 @@ struct AisleListView: View {
             }
         }
         .listStyle(InsetGroupedListStyle())
-        .navigationTitle("Rayons")
         .onAppear {
-            viewModel.fetchAisles()
+            viewModel.fetchMedicinesAndAisles()
         }
         .background(Color(.systemGroupedBackground))
         .alert(item: $viewModel.error) { error in

@@ -53,46 +53,68 @@ class MedicineStockViewModel: ObservableObject {
     }
 
 
-    func fetchMedicines() {
+    func fetchMedicinesAndAisles() {
         db.collection("medicines").addSnapshotListener { [weak self] (querySnapshot, error) in
             DispatchQueue.main.async {
                 if error != nil {
-                    self?.error = .fetchMedicinesError
-                } else {
-                    self?.medicines = querySnapshot?.documents.compactMap { document in
-                        do {
-                            return try document.data(as: Medicine.self)
-                        } catch {
-                            self?.error = .fetchMedicinesError
-                            return nil
-                        }
-                    } ?? []
-                }
-            }
-        }
-    }
-
-    func fetchAisles() {
-        db.collection("medicines").addSnapshotListener { [weak self] (querySnapshot, error) in
-            DispatchQueue.main.async {
-                if error != nil {
-                    self?.error = .fetchAislesError
+                    self?.error = .fetchDataError
                 } else {
                     let medicines: [Medicine] = querySnapshot?.documents.compactMap { document in
                         do {
                             return try document.data(as: Medicine.self)
                         } catch {
-                            self?.error = .fetchAislesError
+                            self?.error = .decodingError
                             return nil
                         }
                     } ?? []
                     
                     self?.medicines = medicines
                     self?.aisles = Array(Set(medicines.map { $0.aisle })).sorted()
+                    print("Found \(medicines.count) medicines in \(self?.aisles.count ?? 0) aisles")
                 }
             }
         }
     }
+//    func fetchMedicines() {
+//        db.collection("medicines").addSnapshotListener { [weak self] (querySnapshot, error) in
+//            DispatchQueue.main.async {
+//                if error != nil {
+//                    self?.error = .fetchMedicinesError
+//                } else {
+//                    self?.medicines = querySnapshot?.documents.compactMap { document in
+//                        do {
+//                            return try document.data(as: Medicine.self)
+//                        } catch {
+//                            self?.error = .fetchMedicinesError
+//                            return nil
+//                        }
+//                    } ?? []
+//                }
+//            }
+//        }
+//    }
+//
+//    func fetchAisles() {
+//        db.collection("medicines").addSnapshotListener { [weak self] (querySnapshot, error) in
+//            DispatchQueue.main.async {
+//                if error != nil {
+//                    self?.error = .fetchAislesError
+//                } else {
+//                    let medicines: [Medicine] = querySnapshot?.documents.compactMap { document in
+//                        do {
+//                            return try document.data(as: Medicine.self)
+//                        } catch {
+//                            self?.error = .fetchAislesError
+//                            return nil
+//                        }
+//                    } ?? []
+//                    
+//                    self?.medicines = medicines
+//                    self?.aisles = Array(Set(medicines.map { $0.aisle })).sorted()
+//                }
+//            }
+//        }
+//    }
     
     func addMedicine(name: String, stockString: String, aisle: String, user: String) -> Medicine? {
         guard !name.isEmpty else {
@@ -197,10 +219,6 @@ class MedicineStockViewModel: ObservableObject {
             }
         }
     }
-    
-    
-    
-    
     
     func updateMedicine(_ medicine: Medicine, user: String) {
         guard let id = medicine.id else {

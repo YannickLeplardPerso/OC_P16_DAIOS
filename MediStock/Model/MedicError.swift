@@ -20,8 +20,6 @@ enum MedicError: LocalizedError, Identifiable {
     case signUpFailed
     case signOutFailed
     case updateStockError
-    case fetchMedicinesError
-    case fetchAislesError
     case fetchHistoryError
     case addMedicineError
     case deleteMedicineError
@@ -32,6 +30,8 @@ enum MedicError: LocalizedError, Identifiable {
     case invalidMedicineName
     case invalidStock
     case invalidAisle
+    case fetchDataError
+    case decodingError
     
     
     var id: String { localizedDescription }  // pour les alertes
@@ -54,10 +54,6 @@ enum MedicError: LocalizedError, Identifiable {
             return "sign out failed"
         case .updateStockError:
             return "Failed to update stock. Please try again."
-        case .fetchMedicinesError:
-            return "Failed to fetch medicines"
-        case .fetchAislesError:
-            return "Failed to fetch aisles"
         case .fetchHistoryError:
             return "Failed to fetch history"
         case .addMedicineError:
@@ -78,6 +74,10 @@ enum MedicError: LocalizedError, Identifiable {
             return "Stock must be a valid number"
         case .invalidAisle:
             return "Aisle must be selected or created"
+        case .fetchDataError:
+            return "Failed to fetch data from server"
+        case .decodingError:
+            return "Failed to read medicine data"
         }
     }
 }
