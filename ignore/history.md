@@ -1,15 +1,20 @@
 en cours
+build 8 dev
+- nouveau médicament : ajout fonction de création dans le view model et une sheet view pour la saisie
+
+
+todo = 
+correction bugs navigation
+history
+suppression dans liste
+
+
+
+
 build 7 dev :
 - Firestore : (ré)initialisation ?!
 - Gestion des erreurs dans les vues avec des alertes
 - Implémentation de la suppression d'un médicament dans MedicineDetailView avec fonction dans le view model : bouton - désactivé et bouton suppression ssi stock = 0
-
-
-
-
-
-
-
 
 build 6 dev :
 - amélioration de l'UI de MedicineListView et MedicineDetailView

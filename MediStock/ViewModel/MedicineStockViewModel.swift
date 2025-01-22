@@ -71,17 +71,6 @@ class MedicineStockViewModel: ObservableObject {
             }
         }
     }
-//    func fetchMedicines() {
-//        db.collection("medicines").addSnapshotListener { (querySnapshot, error) in
-//            if let error = error {
-//                print("Error getting documents: \(error)")
-//            } else {
-//                self.medicines = querySnapshot?.documents.compactMap { document in
-//                    try? document.data(as: Medicine.self)
-//                } ?? []
-//            }
-//        }
-//    }
 
     func fetchAisles() {
         db.collection("medicines").addSnapshotListener { [weak self] (querySnapshot, error) in
@@ -104,33 +93,34 @@ class MedicineStockViewModel: ObservableObject {
             }
         }
     }
-//    func fetchAisles() {
-//        print("Fetching aisles...")
-//        db.collection("medicines").addSnapshotListener { (querySnapshot, error) in
-//            if let error = error {
-//                print("Error getting documents: \(error)")
-//            } else {
-//                let allMedicines = querySnapshot?.documents.compactMap { document in
-//                    try? document.data(as: Medicine.self)
-//                } ?? []
-//                print("Found \(allMedicines.count) medicines")
-//                self.aisles = Array(Set(allMedicines.map { $0.aisle })).sorted()
-//                // new
-//                self.medicines = allMedicines
-//            }
-//        }
-//    }
     
-    func addRandomMedicine(user: String) {
+    func addMedicine(name: String, stockString: String, aisle: String, user: String) -> Medicine? {
+        guard !name.isEmpty else {
+            self.error = .invalidMedicineName
+            return nil
+        }
+        
+        guard let stock = Int(stockString), stock >= 0 else {
+            self.error = .invalidStock
+            return nil
+        }
+        
+        guard !aisle.isEmpty else {
+            self.error = .invalidAisle
+            return nil
+        }
+        
+        let id = UUID().uuidString
+        
         let medicine = Medicine(
-            name: "Medicine \(Int.random(in: 1...100))",
-            stock: Int.random(in: 1...100),
-            aisle: "Aisle \(Int.random(in: 1...10))"
+            id: id,
+            name: name,
+            stock: stock,
+            aisle: aisle
         )
         
-        let id = medicine.id ?? UUID().uuidString
-        
         do {
+            let id = UUID().uuidString
             try db.collection("medicines").document(id).setData(from: medicine)
             addHistory(
                 action: "Added \(medicine.name)",
@@ -138,21 +128,34 @@ class MedicineStockViewModel: ObservableObject {
                 medicineId: id,
                 details: "Added new medicine"
             )
+            return medicine
         } catch {
             self.error = .addMedicineError
+            return nil
         }
     }
+    
 //    func addRandomMedicine(user: String) {
-//        let medicine = Medicine(name: "Medicine \(Int.random(in: 1...100))", stock: Int.random(in: 1...100), aisle: "Aisle \(Int.random(in: 1...10))")
+//        let medicine = Medicine(
+//            name: "Medicine \(Int.random(in: 1...100))",
+//            stock: Int.random(in: 1...100),
+//            aisle: "Aisle \(Int.random(in: 1...10))"
+//        )
+//        
+//        let id = medicine.id ?? UUID().uuidString
+//        
 //        do {
-//            try db.collection("medicines").document(medicine.id ?? UUID().uuidString).setData(from: medicine)
-//            addHistory(action: "Added \(medicine.name)", user: user, medicineId: medicine.id ?? "", details: "Added new medicine")
-//        } catch let error {
-//            print("Error adding document: \(error)")
+//            try db.collection("medicines").document(id).setData(from: medicine)
+//            addHistory(
+//                action: "Added \(medicine.name)",
+//                user: user,
+//                medicineId: id,
+//                details: "Added new medicine"
+//            )
+//        } catch {
+//            self.error = .addMedicineError
 //        }
 //    }
-
-    
     
     func deleteMedicine(_ medicine: Medicine, user: String) {
         guard let id = medicine.id else {

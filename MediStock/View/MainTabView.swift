@@ -5,6 +5,7 @@ import SwiftUI
 struct MainTabView: View {
     @EnvironmentObject var session: SessionStore
     @EnvironmentObject var medicineStore: MedicineStockViewModel
+    @State private var showingAddSheet = false
     
     var body: some View {
         NavigationView {
@@ -24,7 +25,7 @@ struct MainTabView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
-                        medicineStore.addRandomMedicine(user: session.session?.uid ?? "")
+                        showingAddSheet = true
                     }) {
                         Image(systemName: "plus")
                     }
@@ -39,6 +40,9 @@ struct MainTabView: View {
                     }
                 }
             }
+        }
+        .sheet(isPresented: $showingAddSheet) {
+            AddMedicineSheet()
         }
     }
 }

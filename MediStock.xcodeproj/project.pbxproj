@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2A4B7E2A2D3BE865001A4621 /* MedicError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A4B7E292D3BE865001A4621 /* MedicError.swift */; };
+		2AA7476A2D40135600595495 /* AddMedicineSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA747692D40135600595495 /* AddMedicineSheet.swift */; };
 		2AF463452D3AE25C00CBAD25 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2AF463422D3AE25C00CBAD25 /* GoogleService-Info.plist */; };
 		2AF463462D3AE25C00CBAD25 /* history.md in Resources */ = {isa = PBXBuildFile; fileRef = 2AF463432D3AE25C00CBAD25 /* history.md */; };
 		2AF463472D3AE25C00CBAD25 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2AF463422D3AE25C00CBAD25 /* GoogleService-Info.plist */; };
@@ -62,6 +63,7 @@
 
 /* Begin PBXFileReference section */
 		2A4B7E292D3BE865001A4621 /* MedicError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicError.swift; sourceTree = "<group>"; };
+		2AA747692D40135600595495 /* AddMedicineSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMedicineSheet.swift; sourceTree = "<group>"; };
 		2AF463422D3AE25C00CBAD25 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2AF463432D3AE25C00CBAD25 /* history.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = history.md; sourceTree = "<group>"; };
 		53E0D8932C06084700DE1134 /* MediStock.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MediStock.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -149,6 +151,7 @@
 				53E0D8E52C066F4100DE1134 /* AisleListView.swift */,
 				53E0D8E72C066F6500DE1134 /* MedicineDetailView.swift */,
 				53E0D8ED2C06718100DE1134 /* AllMedicinesView.swift */,
+				2AA747692D40135600595495 /* AddMedicineSheet.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -380,6 +383,7 @@
 				53E0D8DE2C0609A800DE1134 /* MedicineStockViewModel.swift in Sources */,
 				53E0D8DC2C06099C00DE1134 /* Medicine.swift in Sources */,
 				53E0D8DA2C06098F00DE1134 /* MedicineListView.swift in Sources */,
+				2AA7476A2D40135600595495 /* AddMedicineSheet.swift in Sources */,
 				53E0D8E62C066F4100DE1134 /* AisleListView.swift in Sources */,
 				53E0D8972C06084700DE1134 /* MediStockApp.swift in Sources */,
 				53E0D8E82C066F6500DE1134 /* MedicineDetailView.swift in Sources */,
@@ -547,7 +551,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = "7 dev";
+				CURRENT_PROJECT_VERSION = "8 dev";
 				DEVELOPMENT_ASSET_PATHS = "\"MediStock/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
@@ -578,7 +582,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = "7 dev";
+				CURRENT_PROJECT_VERSION = "8 dev";
 				DEVELOPMENT_ASSET_PATHS = "\"MediStock/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
