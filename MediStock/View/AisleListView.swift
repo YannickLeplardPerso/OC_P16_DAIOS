@@ -6,32 +6,39 @@ struct AisleListView: View {
     @EnvironmentObject var viewModel: MedicineStockViewModel
     
     var body: some View {
-        List {
-            ForEach(viewModel.aisles, id: \.self) { aisle in
-                NavigationLink(destination: MedicineListView(aisle: aisle)) {
-                    HStack {
-                        Image(systemName: "tray.full")
-                            .foregroundColor(.accentColor)
-                            .font(.title2)
-                            .padding(.trailing, 10)
-                        
-                        VStack(alignment: .leading, spacing: 4) {
-                            Text(aisle)
-                                .font(.headline)
-                            Text("\(viewModel.medicines.filter { $0.aisle == aisle }.count) medicines")
-                                .font(.subheadline)
-                                .foregroundColor(.secondary)
+        VStack {
+            if viewModel.isLoading {
+                    ProgressView()
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+            } else {
+                List {
+                    ForEach(viewModel.aisles, id: \.self) { aisle in
+                        NavigationLink(destination: MedicineListView(aisle: aisle)) {
+                            HStack {
+                                Image(systemName: "tray.full")
+                                    .foregroundColor(.accentColor)
+                                    .font(.title2)
+                                    .padding(.trailing, 10)
+                                
+                                VStack(alignment: .leading, spacing: 4) {
+                                    Text(aisle)
+                                        .font(.headline)
+                                    Text("\(viewModel.medicines.filter { $0.aisle == aisle }.count) medicines")
+                                        .font(.subheadline)
+                                        .foregroundColor(.secondary)
+                                }
+                            }
+                            .padding(.vertical, 8)
                         }
                     }
-                    .padding(.vertical, 8)
                 }
+                .listStyle(InsetGroupedListStyle())
+                .background(Color(.systemGroupedBackground))
             }
         }
-        .listStyle(InsetGroupedListStyle())
         .onAppear {
             viewModel.fetchMedicinesAndAisles()
         }
-        .background(Color(.systemGroupedBackground))
         .alert(item: $viewModel.error) { error in
             Alert(
                 title: Text("Error"),

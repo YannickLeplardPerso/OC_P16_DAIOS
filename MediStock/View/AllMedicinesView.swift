@@ -36,14 +36,19 @@ struct AllMedicinesView: View {
             .padding(.vertical)
             .background(Color(.systemGroupedBackground))
             
-            List {
-                ForEach(filteredAndSortedMedicines, id: \.id) { medicine in
-                    NavigationLink(destination: MedicineDetailView(medicineId: medicine.id ?? "", sourceView: "Medicines")) {
-                        MedicineRowView(medicine: medicine, showAisle: true)
+            if viewModel.isLoading {
+                ProgressView()
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+            } else {
+                List {
+                    ForEach(filteredAndSortedMedicines, id: \.id) { medicine in
+                        NavigationLink(destination: MedicineDetailView(medicineId: medicine.id ?? "", sourceView: "Medicines")) {
+                            MedicineRowView(medicine: medicine, showAisle: true)
+                        }
                     }
                 }
+                .listStyle(InsetGroupedListStyle())
             }
-            .listStyle(InsetGroupedListStyle())
         }
         .onAppear {
             viewModel.fetchMedicinesAndAisles()

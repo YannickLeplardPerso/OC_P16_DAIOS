@@ -10,6 +10,7 @@ import SwiftUI
 
 
 struct HistoryEntryRow: View {
+    @EnvironmentObject var session: SessionStore
     let entry: HistoryEntry
     
     var body: some View {
@@ -18,6 +19,9 @@ struct HistoryEntryRow: View {
                 .font(.headline)
             Text(entry.details)
                 .font(.subheadline)
+                .foregroundColor(.secondary)
+            Text(session.session?.email ?? entry.user)
+                .font(.caption)
                 .foregroundColor(.secondary)
             Text(formatDate(entry.timestamp))
                 .font(.caption)

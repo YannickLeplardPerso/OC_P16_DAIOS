@@ -1,10 +1,14 @@
 en cours
+build 11 dev
+- History : Ajout de l’utilisateur (adresse email) à l’origine d’un changement
+- indicateurs de chargement de données : indicateur isLoading dans MedicineStockViewModel, et progress view lors des appels à fetchMedicinesAndAisles et fetchHistory ; séparation du chargement initial et de la mise à jour via le listener ; modifications dans les vues qui appellent ces fonctions pour afficher une progress view pendant le chargement
+
+
+
 build 10 dev
 - création de composants toolbar : MedicNavigationToolbar pour la navigation et MedicActionsToolbar pour les boutons + d’ajout de médicament et la déconnexion 
 - création d'un composant MedicineRowView utilisé dans AllMedicinesView et MedicineListView
 - création de composants pour les sections de MedicineDetailView et pour les éléments de la liste d’historique
-
-
 
 build 9 dev
 - correction bugs navigation et intitulé des boutons « back »

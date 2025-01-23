@@ -18,7 +18,15 @@ struct MedicineDetailView: View {
             if let medicine = medicine {
                 MedicineInformationSection(medicine: medicine)
                 StockManagementSection(medicine: medicine)
-                HistorySection(history: viewModel.history)
+                if viewModel.isLoading {
+                    Section(header: Text("History")) {
+                        ProgressView()
+                            .frame(maxWidth: .infinity)
+                            .listRowBackground(Color(.systemGroupedBackground))
+                    }
+                } else {
+                    HistorySection(history: viewModel.history)
+                }
             }
         }
         .listStyle(InsetGroupedListStyle())
