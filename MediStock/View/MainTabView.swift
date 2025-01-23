@@ -23,22 +23,7 @@ struct MainTabView: View {
                     }
             }
             .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: {
-                        showingAddSheet = true
-                    }) {
-                        Image(systemName: "plus")
-                    }
-                }
-                
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: {
-                        session.signOut()
-                    }) {
-                        Image(systemName: "rectangle.portrait.and.arrow.right")
-                            .foregroundColor(.red)
-                    }
-                }
+                MedicActionsToolbar(showingAddSheet: $showingAddSheet)
             }
         }
         .sheet(isPresented: $showingAddSheet) {

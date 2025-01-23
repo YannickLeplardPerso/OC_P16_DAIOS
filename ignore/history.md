@@ -1,8 +1,14 @@
 en cours
+build 10 dev
+- création de composants toolbar : MedicNavigationToolbar pour la navigation et MedicActionsToolbar pour les boutons + d’ajout de médicament et la déconnexion 
+- création d'un composant MedicineRowView utilisé dans AllMedicinesView et MedicineListView
+- création de composants pour les sections de MedicineDetailView et pour les éléments de la liste d’historique
+
+
+
 build 9 dev
 - correction bugs navigation et intitulé des boutons « back »
 - MedicineStockViewModel : création d’une fonction fetchMedicinesAndAisles à la place de fetchMedicines et fetchAisles
-
 
 build 8 dev
 - nouveau médicament : ajout fonction de création dans le view model et une sheet view pour la saisie

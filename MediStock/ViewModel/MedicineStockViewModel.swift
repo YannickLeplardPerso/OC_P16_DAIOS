@@ -70,7 +70,6 @@ class MedicineStockViewModel: ObservableObject {
                     
                     self?.medicines = medicines
                     self?.aisles = Array(Set(medicines.map { $0.aisle })).sorted()
-                    print("Found \(medicines.count) medicines in \(self?.aisles.count ?? 0) aisles")
                 }
             }
         }
@@ -187,8 +186,7 @@ class MedicineStockViewModel: ObservableObject {
         
         db.collection("medicines").document(id).delete { [weak self] error in
             DispatchQueue.main.async {
-                if let error = error {
-                    print("Error deleting medicine: \(error)")
+                if error != nil {
                     self?.error = .deleteMedicineError
                 } else {
                     self?.addHistory(
@@ -238,15 +236,6 @@ class MedicineStockViewModel: ObservableObject {
             self.error = .updateMedicineError
         }
     }
-//    func updateMedicine(_ medicine: Medicine, user: String) {
-//        guard let id = medicine.id else { return }
-//        do {
-//            try db.collection("medicines").document(id).setData(from: medicine)
-//            addHistory(action: "Updated \(medicine.name)", user: user, medicineId: id, details: "Updated medicine details")
-//        } catch let error {
-//            print("Error updating document: \(error)")
-//        }
-//    }
 
     private func addHistory(action: String, user: String, medicineId: String, details: String) {
         let history = HistoryEntry(
@@ -262,15 +251,6 @@ class MedicineStockViewModel: ObservableObject {
             self.error = .addHistoryError
         }
     }
-//    private func addHistory(action: String, user: String, medicineId: String, details: String) {
-//        let history = HistoryEntry(medicineId: medicineId, user: user, action: action, details: details)
-//        do {
-//            try db.collection("history").document(history.id ?? UUID().uuidString).setData(from: history)
-//        } catch let error {
-//            print("Error adding history: \(error)")
-//        }
-//    }
-
     
     func fetchHistory(for medicine: Medicine) {
         guard let medicineId = medicine.id else {

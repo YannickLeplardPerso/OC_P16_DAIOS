@@ -39,27 +39,7 @@ struct AllMedicinesView: View {
             List {
                 ForEach(filteredAndSortedMedicines, id: \.id) { medicine in
                     NavigationLink(destination: MedicineDetailView(medicineId: medicine.id ?? "", sourceView: "Medicines")) {
-                        HStack {
-                            Image(systemName: "pills.fill")
-                                .foregroundColor(.accentColor)
-                                .font(.title2)
-                                .padding(.trailing, 10)
-                            
-                            VStack(alignment: .leading, spacing: 4) {
-                                Text(medicine.name)
-                                    .font(.headline)
-                                HStack {
-                                    Text("Stock: \(medicine.stock)")
-                                        .foregroundColor(.secondary)
-                                    Text("•")
-                                        .foregroundColor(.secondary)
-                                    Text(medicine.aisle)
-                                        .foregroundColor(.secondary)
-                                }
-                                .font(.subheadline)
-                            }
-                        }
-                        .padding(.vertical, 8)
+                        MedicineRowView(medicine: medicine, showAisle: true)
                     }
                 }
             }

@@ -73,11 +73,6 @@ struct AddMedicineSheet: View {
                 }
             }
         }
-//        .navigationDestination(isPresented: $navigateToDetail) {
-//            if let medicine = newMedicine {
-//                MedicineDetailView(medicineId: medicine.id ?? "")
-//            }
-//        }
         .alert(item: $viewModel.error) { error in
             Alert(
                 title: Text("Error"),
