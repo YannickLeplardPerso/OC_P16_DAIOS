@@ -47,7 +47,8 @@ enum MedicError: LocalizedError, Identifiable {
         case .emailAlreadyInUse:
             return "An account already exists with this email"
         case .weakPassword:
-            return "Password is too weak"
+//            return "Password is too weak : "
+            return "Password must be at least 10 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character (!@#$%^&*(),.?\":{}|<>)"
         case .signUpFailed:
             return "sign up failed"
         case .signOutFailed:

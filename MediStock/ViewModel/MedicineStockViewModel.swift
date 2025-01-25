@@ -9,7 +9,20 @@ class MedicineStockViewModel: ObservableObject {
     @Published var history: [HistoryEntry] = []
     @Published var error: MedicError?
     @Published var isLoading = false
+    @Published var searchText = ""
+    @Published var sortOption: SortOption = .none
+    @Published var currentQuery: Query?
+    
     private var db = Firestore.firestore()
+    
+    func getMedicines() {
+        if MedicConfig.useFirebaseFiltering {
+            fetchMedicinesWithFilters()
+        } else {
+            fetchMedicinesAndAisles()
+            // puis filteredAndSortedMedicines s'applique sur les résultats
+        }
+    }
 
     func fetchMedicinesAndAisles() {
         isLoading = true
@@ -24,6 +37,65 @@ class MedicineStockViewModel: ObservableObject {
         db.collection("medicines").addSnapshotListener { [weak self] (snapshot, error) in
             DispatchQueue.main.async {
                 self?.processMedicinesSnapshot(snapshot, error: error)
+            }
+        }
+    }
+    
+    // Recherche et tri
+    var filteredAndSortedMedicines: [Medicine] {
+        var filteredMedicines = medicines
+        
+        if !searchText.isEmpty {
+            filteredMedicines = filteredMedicines.filter {
+                $0.name.lowercased().contains(searchText.lowercased())
+            }
+        }
+        
+        switch sortOption {
+        case .name:
+            filteredMedicines.sort { $0.name.lowercased() < $1.name.lowercased() }
+        case .stock:
+            filteredMedicines.sort { $0.stock < $1.stock }
+        case .none:
+            break
+        }
+        
+        return filteredMedicines
+    }
+    
+    func fetchMedicinesWithFilters() {
+        isLoading = true
+        var query = db.collection("medicines") as Query
+        
+        if !searchText.isEmpty {
+            let upperBound = searchText.appending("\u{f8ff}")
+            query = query.whereField("name", isGreaterThanOrEqualTo: searchText)
+                        .whereField("name", isLessThan: upperBound)
+        }
+        
+        switch sortOption {
+        case .name:
+            query = query.order(by: "name")
+        case .stock:
+            query = query.order(by: "stock")
+        case .none:
+            break
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
+            query.getDocuments { [weak self] (snapshot, error) in
+                DispatchQueue.main.async {
+                    self?.isLoading = false
+                    if error != nil {
+                        self?.error = .fetchDataError
+                        return
+                    }
+                    
+                    self?.medicines = snapshot?.documents.compactMap { document in
+                        try? document.data(as: Medicine.self)
+                    } ?? []
+                    self?.aisles = Array(Set(self?.medicines.map { $0.aisle } ?? [])).sorted()
+                }
             }
         }
     }
@@ -46,6 +118,9 @@ class MedicineStockViewModel: ObservableObject {
         self.medicines = medicines
         self.aisles = Array(Set(medicines.map { $0.aisle })).sorted()
     }
+    
+    
+    
     
     func addMedicine(name: String, stockString: String, aisle: String, user: String) -> Medicine? {
         guard !name.isEmpty else {
@@ -181,6 +256,9 @@ class MedicineStockViewModel: ObservableObject {
 //        }
 //    }
     
+    
+    
+    
     func fetchHistory(for medicine: Medicine) {
         guard let medicineId = medicine.id else {
             self.error = .invalidMedicineId
@@ -206,26 +284,6 @@ class MedicineStockViewModel: ObservableObject {
                     self?.processHistorySnapshot(snapshot, error: error)
                 }
             }
-        
-//        db.collection("history")
-//            .whereField("medicineId", isEqualTo: medicineId)
-//            .addSnapshotListener { [weak self] (querySnapshot, error) in
-//                DispatchQueue.main.async {
-//                    self?.isLoading = false
-//                    if error != nil {
-//                        self?.error = .fetchHistoryError
-//                    } else {
-//                        self?.history = querySnapshot?.documents.compactMap { document in
-//                            do {
-//                                return try document.data(as: HistoryEntry.self)
-//                            } catch {
-//                                self?.error = .fetchHistoryError
-//                                return nil
-//                            }
-//                        } ?? []
-//                    }
-//                }
-//            }
     }
     
     private func processHistorySnapshot(_ snapshot: QuerySnapshot?, error: Error?) {

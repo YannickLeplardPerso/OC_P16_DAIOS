@@ -1,9 +1,19 @@
 en cours
+build 12 dev
+- signup : vérification locale des contraintes du mot de passe
+- tri et recherche : déplacement de la logique de tri et recherche dans MedicineStockViewModel, et création d’une fonction « Firebase »
+- création d'un fichier pour les enum (SortOption, loadingStrategy)
+- création d'une structure MedicConfig pour configurer des choix (notamment lemode de tri, de chargement) 
+
+
+
+bug : création nouveau medic dans detail... on reste sur detail précédent medic
+
+
+
 build 11 dev
 - History : Ajout de l’utilisateur (adresse email) à l’origine d’un changement
 - indicateurs de chargement de données : indicateur isLoading dans MedicineStockViewModel, et progress view lors des appels à fetchMedicinesAndAisles et fetchHistory ; séparation du chargement initial et de la mise à jour via le listener ; modifications dans les vues qui appellent ces fonctions pour afficher une progress view pendant le chargement
-
-
 
 build 10 dev
 - création de composants toolbar : MedicNavigationToolbar pour la navigation et MedicActionsToolbar pour les boutons + d’ajout de médicament et la déconnexion 

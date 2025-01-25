@@ -4,8 +4,6 @@ import SwiftUI
 
 struct AllMedicinesView: View {
     @EnvironmentObject var viewModel: MedicineStockViewModel
-    @State private var filterText: String = ""
-    @State private var sortOption: SortOption = .none
 
     var body: some View {
         VStack(spacing: 0) {
@@ -14,7 +12,7 @@ struct AllMedicinesView: View {
                 HStack {
                     Image(systemName: "magnifyingglass")
                         .foregroundColor(.secondary)
-                    TextField("Search medicine", text: $filterText)
+                    TextField("Search medicine", text: $viewModel.searchText)
                 }
                 .padding()
                 .background(Color(.tertiarySystemBackground))
@@ -25,7 +23,7 @@ struct AllMedicinesView: View {
                 )
                 .padding(.horizontal)
                 
-                Picker("Sort by", selection: $sortOption) {
+                Picker("Sort by", selection: $viewModel.sortOption) {
                     Text("None").tag(SortOption.none)
                     Text("Name").tag(SortOption.name)
                     Text("Stock").tag(SortOption.stock)
@@ -41,7 +39,7 @@ struct AllMedicinesView: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
             } else {
                 List {
-                    ForEach(filteredAndSortedMedicines, id: \.id) { medicine in
+                    ForEach(viewModel.filteredAndSortedMedicines, id: \.id) { medicine in
                         NavigationLink(destination: MedicineDetailView(medicineId: medicine.id ?? "", sourceView: "Medicines")) {
                             MedicineRowView(medicine: medicine, showAisle: true)
                         }
@@ -51,7 +49,8 @@ struct AllMedicinesView: View {
             }
         }
         .onAppear {
-            viewModel.fetchMedicinesAndAisles()
+            viewModel.getMedicines()
+//            viewModel.fetchMedicinesAndAisles()
         }
         .background(Color(.systemGroupedBackground))
         .alert(item: $viewModel.error) { error in
@@ -62,35 +61,6 @@ struct AllMedicinesView: View {
             )
         }
     }
-    
-    var filteredAndSortedMedicines: [Medicine] {
-        var medicines = viewModel.medicines
-        
-        // Filtrage
-        if !filterText.isEmpty {
-            medicines = medicines.filter { $0.name.lowercased().contains(filterText.lowercased()) }
-        }
-        
-        // Tri
-        switch sortOption {
-        case .name:
-            medicines.sort { $0.name.lowercased() < $1.name.lowercased() }
-        case .stock:
-            medicines.sort { $0.stock < $1.stock }
-        case .none:
-            break
-        }
-        
-        return medicines
-    }
-}
-
-enum SortOption: String, CaseIterable, Identifiable {
-    case none
-    case name
-    case stock
-
-    var id: String { self.rawValue }
 }
 
 

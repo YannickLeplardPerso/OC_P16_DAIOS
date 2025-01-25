@@ -10,30 +10,19 @@ class SessionStore: ObservableObject {
             self.error = .invalidEmail
             return
         }
-        guard !password.isEmpty else {
-            self.error = .invalidPassword
+        guard isPasswordValid(password) else {
+            self.error = .weakPassword
             return
         }
-
         
         Auth.auth().createUser(withEmail: email, password: password) { [weak self] (result, error) in
-            if let error = error as NSError? {
-                print("Firebase Auth error code: \(error.code)")
-                print("Firebase Auth error domain: \(error.domain)")
-                print("Firebase Auth error description: \(error.localizedDescription)")
-                
+            if let error = error as NSError? {   
                 switch error.code {
                 case AuthErrorCode.emailAlreadyInUse.rawValue:
-                    print("Email already in use")  // Debug
                     self?.error = .emailAlreadyInUse
                 case AuthErrorCode.invalidEmail.rawValue:
-                    print("Invalid email")  // Debug
                     self?.error = .invalidEmail
-                case AuthErrorCode.weakPassword.rawValue:
-                    print("Weak password")  // Debug
-                    self?.error = .weakPassword
                 default:
-                    print("Other error")  // Debug
                     self?.error = .signUpFailed
                 }
             } else {
@@ -41,24 +30,15 @@ class SessionStore: ObservableObject {
                 self?.session = User(uid: result?.user.uid ?? "", email: result?.user.email ?? "")
             }
         }
-//        Auth.auth().createUser(withEmail: email, password: password) { [weak self] (result, error) in
-//            if let error = error as NSError? {
-//                switch error.code {
-//                case AuthErrorCode.emailAlreadyInUse.rawValue:
-//                    self?.error = .emailAlreadyInUse
-//                case AuthErrorCode.invalidEmail.rawValue:
-//                    self?.error = .invalidEmail
-//                case AuthErrorCode.weakPassword.rawValue:
-//                    self?.error = .weakPassword
-//                default:
-//                    self?.error = .signUpFailed
-//                }
-//            } else {
-//                self?.error = nil
-//                self?.session = User(uid: result?.user.uid ?? "", email: result?.user.email ?? "")
-//            }
-//        }
     }
+    
+    private func isPasswordValid(_ password: String) -> Bool {
+       let passwordRegex = NSPredicate(format: "SELF MATCHES %@",
+           "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[!@#$%^&*(),.?\":{}|<>])[A-Za-z\\d!@#$%^&*(),.?\":{}|<>]{10,}$"
+       )
+       return passwordRegex.evaluate(with: password)
+    }
+
 
     func signIn(email: String, password: String) {
         guard !email.isEmpty else {

@@ -14,6 +14,8 @@
 		2A0E35012D41981500FC7EA2 /* StockManagementSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0E35002D41981500FC7EA2 /* StockManagementSection.swift */; };
 		2A0E35032D41983800FC7EA2 /* HistorySection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0E35022D41983800FC7EA2 /* HistorySection.swift */; };
 		2A0E35052D41986100FC7EA2 /* HistoryEntryRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0E35042D41986100FC7EA2 /* HistoryEntryRow.swift */; };
+		2A2068B52D4510DB008F80C0 /* MedicEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2068B42D4510DB008F80C0 /* MedicEnum.swift */; };
+		2A2068B72D4518C0008F80C0 /* MedicConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2068B62D4518C0008F80C0 /* MedicConfig.swift */; };
 		2A4B7E2A2D3BE865001A4621 /* MedicError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A4B7E292D3BE865001A4621 /* MedicError.swift */; };
 		2AA7476A2D40135600595495 /* AddMedicineSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA747692D40135600595495 /* AddMedicineSheet.swift */; };
 		2AF463452D3AE25C00CBAD25 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2AF463422D3AE25C00CBAD25 /* GoogleService-Info.plist */; };
@@ -76,6 +78,8 @@
 		2A0E35002D41981500FC7EA2 /* StockManagementSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockManagementSection.swift; sourceTree = "<group>"; };
 		2A0E35022D41983800FC7EA2 /* HistorySection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistorySection.swift; sourceTree = "<group>"; };
 		2A0E35042D41986100FC7EA2 /* HistoryEntryRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryEntryRow.swift; sourceTree = "<group>"; };
+		2A2068B42D4510DB008F80C0 /* MedicEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicEnum.swift; sourceTree = "<group>"; };
+		2A2068B62D4518C0008F80C0 /* MedicConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicConfig.swift; sourceTree = "<group>"; };
 		2A4B7E292D3BE865001A4621 /* MedicError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicError.swift; sourceTree = "<group>"; };
 		2AA747692D40135600595495 /* AddMedicineSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMedicineSheet.swift; sourceTree = "<group>"; };
 		2AF463422D3AE25C00CBAD25 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -174,6 +178,8 @@
 				53E0D8DB2C06099C00DE1134 /* Medicine.swift */,
 				53E0D8E92C066F7A00DE1134 /* HistoryEntry.swift */,
 				2A4B7E292D3BE865001A4621 /* MedicError.swift */,
+				2A2068B42D4510DB008F80C0 /* MedicEnum.swift */,
+				2A2068B62D4518C0008F80C0 /* MedicConfig.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -419,6 +425,7 @@
 				53E0D8EA2C066F7A00DE1134 /* HistoryEntry.swift in Sources */,
 				53E0D8E02C0609B900DE1134 /* SessionStore.swift in Sources */,
 				53E0D8DE2C0609A800DE1134 /* MedicineStockViewModel.swift in Sources */,
+				2A2068B72D4518C0008F80C0 /* MedicConfig.swift in Sources */,
 				53E0D8DC2C06099C00DE1134 /* Medicine.swift in Sources */,
 				2A0E35012D41981500FC7EA2 /* StockManagementSection.swift in Sources */,
 				2A0E35052D41986100FC7EA2 /* HistoryEntryRow.swift in Sources */,
@@ -428,6 +435,7 @@
 				2A0E34F82D4166B300FC7EA2 /* MedicNavigationToolbar.swift in Sources */,
 				53E0D8E62C066F4100DE1134 /* AisleListView.swift in Sources */,
 				53E0D8972C06084700DE1134 /* MediStockApp.swift in Sources */,
+				2A2068B52D4510DB008F80C0 /* MedicEnum.swift in Sources */,
 				2A0E34FF2D4197F000FC7EA2 /* MedicineInformationSection.swift in Sources */,
 				53E0D8E82C066F6500DE1134 /* MedicineDetailView.swift in Sources */,
 				53E0D8EE2C06718100DE1134 /* AllMedicinesView.swift in Sources */,
@@ -595,7 +603,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = "11 dev";
+				CURRENT_PROJECT_VERSION = "12 dev";
 				DEVELOPMENT_ASSET_PATHS = "\"MediStock/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
@@ -626,7 +634,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = "11 dev";
+				CURRENT_PROJECT_VERSION = "12 dev";
 				DEVELOPMENT_ASSET_PATHS = "\"MediStock/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
