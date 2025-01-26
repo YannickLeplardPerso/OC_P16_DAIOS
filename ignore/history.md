@@ -1,15 +1,19 @@
 en cours
+build 13 dev
+-  implémentation du lazy loading pour l'history
+
+
+
+bug : création nouveau medic dans detail... on reste sur detail précédent medic
+(idem ailleurs, on perd le fil)
+
+
+
 build 12 dev
 - signup : vérification locale des contraintes du mot de passe
 - tri et recherche : déplacement de la logique de tri et recherche dans MedicineStockViewModel, et création d’une fonction « Firebase »
 - création d'un fichier pour les enum (SortOption, loadingStrategy)
 - création d'une structure MedicConfig pour configurer des choix (notamment lemode de tri, de chargement) 
-
-
-
-bug : création nouveau medic dans detail... on reste sur detail précédent medic
-
-
 
 build 11 dev
 - History : Ajout de l’utilisateur (adresse email) à l’origine d’un changement

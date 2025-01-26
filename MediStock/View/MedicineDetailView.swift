@@ -25,7 +25,7 @@ struct MedicineDetailView: View {
                             .listRowBackground(Color(.systemGroupedBackground))
                     }
                 } else {
-                    HistorySection(history: viewModel.history)
+                    HistorySection(medicine: medicine)
                 }
             }
         }

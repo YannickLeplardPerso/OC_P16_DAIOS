@@ -13,6 +13,11 @@ class MedicineStockViewModel: ObservableObject {
     @Published var sortOption: SortOption = .none
     @Published var currentQuery: Query?
     
+    private var lastHistoryDocument: DocumentSnapshot?
+    var hasMoreHistoryToLoad: Bool {
+        lastHistoryDocument != nil
+    }
+    
     private var db = Firestore.firestore()
     
     func getMedicines() {
@@ -257,9 +262,16 @@ class MedicineStockViewModel: ObservableObject {
 //    }
     
     
+    func fetchHistory(for medicine: Medicine, loadMore: Bool = false) {
+        switch MedicConfig.loadingHistoryStrategy {
+        case .eager:
+            fetchHistoryEager(for: medicine)
+        case .lazy:
+            fetchHistoryPaged(for: medicine)
+        }
+    }
     
-    
-    func fetchHistory(for medicine: Medicine) {
+    func fetchHistoryEager(for medicine: Medicine) {
         guard let medicineId = medicine.id else {
             self.error = .invalidMedicineId
             return
@@ -286,18 +298,80 @@ class MedicineStockViewModel: ObservableObject {
             }
     }
     
-    private func processHistorySnapshot(_ snapshot: QuerySnapshot?, error: Error?) {
+//    private func processHistorySnapshot(_ snapshot: QuerySnapshot?, error: Error?) {
+//        if error != nil {
+//            self.error = .fetchHistoryError
+//        } else {
+//            history = snapshot?.documents.compactMap { document in
+//                do {
+//                    return try document.data(as: HistoryEntry.self)
+//                } catch {
+//                    self.error = .fetchHistoryError
+//                    return nil
+//                }
+//            } ?? []
+//        }
+//    }
+
+    func fetchHistoryPaged(for medicine: Medicine, loadMore: Bool = false) {
+        guard let medicineId = medicine.id else {
+            self.error = .invalidMedicineId
+            return
+        }
+        
+        isLoading = true
+        if !loadMore {
+            history = []
+        }
+        
+        var query = db.collection("history")
+            .whereField("medicineId", isEqualTo: medicineId)
+            .order(by: "timestamp", descending: true)
+            .limit(to: MedicConfig.pageSize + 1) // pour ne pas afficher le bouton si il n'y a plus de données
+        
+        if loadMore, let last = lastHistoryDocument {
+            query = query.start(afterDocument: last)
+        }
+        
+        query.getDocuments { [weak self] snapshot, error in
+            DispatchQueue.main.async {
+                self?.isLoading = false
+                self?.processHistorySnapshot(snapshot, error: error, loadMore: loadMore)
+            }
+        }
+    }
+    
+    private func processHistorySnapshot(_ snapshot: QuerySnapshot?, error: Error?, loadMore: Bool = false) {
         if error != nil {
             self.error = .fetchHistoryError
+            return
+        }
+        
+        let entries: [HistoryEntry] = snapshot?.documents.compactMap { document in
+            do {
+                return try document.data(as: HistoryEntry.self)
+            } catch {
+                self.error = .fetchHistoryError
+                return nil
+            }
+        } ?? []
+
+        if MedicConfig.loadingHistoryStrategy == .lazy {
+            if loadMore {
+                history.append(contentsOf: entries.prefix(MedicConfig.pageSize))
+            } else {
+                history = Array(entries.prefix(MedicConfig.pageSize))
+            }
+            
+            if entries.count > MedicConfig.pageSize {
+                lastHistoryDocument = snapshot?.documents[MedicConfig.pageSize - 1]
+            } else {
+                lastHistoryDocument = nil
+            }
+//            lastHistoryDocument = entries.count > MedicConfig.pageSize ?
+//            snapshot?.documents[MedicConfig.pageSize - 1] : nil
         } else {
-            history = snapshot?.documents.compactMap { document in
-                do {
-                    return try document.data(as: HistoryEntry.self)
-                } catch {
-                    self.error = .fetchHistoryError
-                    return nil
-                }
-            } ?? []
+            history = entries
         }
     }
     
