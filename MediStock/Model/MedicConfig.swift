@@ -12,7 +12,7 @@ import Foundation
 struct MedicConfig {
     static let useFirebaseFiltering = true
     
-    static let loadingMedicineStrategy: LoadingStrategy = .eager
+    static let loadingMedicineStrategy: LoadingStrategy = .lazy
     
     static let loadingHistoryStrategy: LoadingStrategy = .lazy
     static let pageSize = 2 //20

@@ -1,13 +1,18 @@
 en cours
-build 13 dev
--  implémentation du lazy loading pour l'history
-
+build 14 dev
+-  implémentation du lazy loading pour medicine
 
 
 bug : création nouveau medic dans detail... on reste sur detail précédent medic
 (idem ailleurs, on perd le fil)
 
 
+
+
+
+
+build 13 dev
+-  implémentation du lazy loading pour l'history
 
 build 12 dev
 - signup : vérification locale des contraintes du mot de passe

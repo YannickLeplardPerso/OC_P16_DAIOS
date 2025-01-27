@@ -27,8 +27,12 @@ struct HistorySection: View {
                 }
                 
                 if viewModel.hasMoreHistoryToLoad{
-                    Button("Load More") {
-                        viewModel.fetchHistoryPaged(for: medicine, loadMore: true)
+                    if viewModel.isLoadingMore {
+                        ProgressView()
+                    } else {
+                        Button("Load More") {
+                            viewModel.fetchHistoryPaged(for: medicine, loadMore: true)
+                        }
                     }
                 }
             }

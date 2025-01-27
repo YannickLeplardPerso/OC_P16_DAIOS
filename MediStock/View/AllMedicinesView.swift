@@ -44,13 +44,27 @@ struct AllMedicinesView: View {
                             MedicineRowView(medicine: medicine, showAisle: true)
                         }
                     }
+                    
+                    if MedicConfig.loadingMedicineStrategy == .lazy && viewModel.hasMoreMedicines {
+                        HStack {
+                            Spacer()
+                            if viewModel.isLoadingMore {
+                                ProgressView()
+                            } else {
+                                Button("Load More") {
+                                    viewModel.fetchMedicines(loadMore: true)
+                                }
+                            }
+                            Spacer()
+                        }
+                        .padding(.vertical)
+                    }
                 }
                 .listStyle(InsetGroupedListStyle())
             }
         }
         .onAppear {
-            viewModel.getMedicines()
-//            viewModel.fetchMedicinesAndAisles()
+            viewModel.fetchMedicines()
         }
         .background(Color(.systemGroupedBackground))
         .alert(item: $viewModel.error) { error in
