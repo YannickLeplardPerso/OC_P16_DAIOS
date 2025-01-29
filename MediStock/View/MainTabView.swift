@@ -6,9 +6,9 @@ struct MainTabView: View {
     @EnvironmentObject var session: SessionStore
     @EnvironmentObject var medicineStore: MedicineStockViewModel
     @State private var showingAddSheet = false
-    
+
     var body: some View {
-        NavigationView {
+        NavigationStack() {
             TabView {
                 AisleListView()
                     .tabItem {

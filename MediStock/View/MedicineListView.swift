@@ -3,10 +3,15 @@ import SwiftUI
 
 
 struct MedicineListView: View {
+    var aisle: String
+    
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var viewModel: MedicineStockViewModel
     @State private var showingAddSheet = false
-    var aisle: String
+    
+    var aisleStillExists: Bool {
+        viewModel.aisles.contains(aisle)
+    }
 
     var body: some View {
         List {
@@ -22,10 +27,22 @@ struct MedicineListView: View {
             MedicNavigationToolbar(title: aisle, backText: "Aisles")
             MedicActionsToolbar(showingAddSheet: $showingAddSheet)
         }
+        .onChange(of: aisleStillExists) { oldValue, newValue in
+            if !newValue {
+                dismiss()
+            }
+        }
         .sheet(isPresented: $showingAddSheet) {
-            AddMedicineSheet()
+            AddMedicineSheet(fromAisle: aisle)
         }
         .background(Color(.systemGroupedBackground))
+        .alert(item: $viewModel.error) { error in
+            Alert(
+                title: Text("Error"),
+                message: Text(error.localizedDescription),
+                dismissButton: .default(Text("OK"))
+            )
+        }
     }
 }
 

@@ -8,15 +8,22 @@
 import SwiftUI
 
 struct AddMedicineSheet: View {
+    let fromAisle: String?
+    
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var viewModel: MedicineStockViewModel
     @EnvironmentObject var session: SessionStore
-    
     @State private var medicineName = ""
     @State private var initialStock = ""
     @State private var selectedAisle = ""
     @State private var newAisle = ""
     @State private var isNewAisle = false
+    
+    init(fromAisle: String? = nil) {
+        self.fromAisle = fromAisle
+        self._selectedAisle = State(initialValue: fromAisle ?? "")
+        self._isNewAisle = State(initialValue: false) 
+    }
     
     var body: some View {
         NavigationView {

@@ -24,15 +24,8 @@ class MedicineStockViewModel: ObservableObject {
     }
     
     private var db = Firestore.firestore()
-    
-//    func getMedicines() {
-//        if MedicConfig.useFirebaseFiltering {
-//            fetchMedicinesWithFilters()
-//        } else {
-//            fetchMedicinesAndAisles()
-//            // puis filteredAndSortedMedicines s'applique sur les résultats
-//        }
-//    }
+    // pour les tests ?
+//    internal var db = Firestore.firestore()
     
     func fetchMedicines(loadMore: Bool = false) {
         switch MedicConfig.loadingMedicineStrategy {
@@ -45,6 +38,7 @@ class MedicineStockViewModel: ObservableObject {
 
     func fetchMedicinesAndAisles() {
         isLoading = true
+        
         // Chargement initial
         db.collection("medicines").getDocuments { [weak self] (snapshot, error) in
             DispatchQueue.main.async {
@@ -63,7 +57,6 @@ class MedicineStockViewModel: ObservableObject {
     private func fetchMedicinesPaged(loadMore: Bool = false) {
         if !loadMore {
             medicines = []
-//            isLoading = true
         }
         else {
             isLoadingMore = true
@@ -98,7 +91,6 @@ class MedicineStockViewModel: ObservableObject {
                 } else {
                     self?.isLoading = false
                 }
-//                self?.isLoading = false
                 self?.processMedicinesSnapshot(snapshot, error: error, loadMore: loadMore)
             }
         }
@@ -133,10 +125,6 @@ class MedicineStockViewModel: ObservableObject {
         
         aisles = Array(Set(medicines.map { $0.aisle })).sorted()
     }
-    
-    
-    
-    
     
     // Recherche et tri
     var filteredAndSortedMedicines: [Medicine] {
@@ -238,15 +226,17 @@ class MedicineStockViewModel: ObservableObject {
         let id = UUID().uuidString
         
         let medicine = Medicine(
-            id: id,
+//            id: id,
+            id: nil, // temp
             name: name,
             stock: stock,
             aisle: aisle
         )
         
         do {
-            let id = UUID().uuidString
+//            let id = UUID().uuidString
             try db.collection("medicines").document(id).setData(from: medicine)
+            
             addHistory(
                 action: "Added \(medicine.name)",
                 user: user,
@@ -347,6 +337,8 @@ class MedicineStockViewModel: ObservableObject {
                                          user: user,
                                          medicineId: id,
                                          details: "Stock changed from \(oldStock) to \(newStock)")
+                        // pour mettre à jour quand on est en mode lazy et que l'on fait une modification du stock
+                        self?.fetchHistory(for: medicine)
                     }
                 }
             }
@@ -358,7 +350,7 @@ class MedicineStockViewModel: ObservableObject {
         case .eager:
             fetchHistoryEager(for: medicine)
         case .lazy:
-            fetchHistoryPaged(for: medicine)
+            fetchHistoryPaged(for: medicine, loadMore: loadMore)
         }
     }
     
@@ -406,7 +398,7 @@ class MedicineStockViewModel: ObservableObject {
             .whereField("medicineId", isEqualTo: medicineId)
             .order(by: "timestamp", descending: true)
             .limit(to: MedicConfig.pageSize + 1) // pour ne pas afficher le bouton si il n'y a plus de données
-        
+                
         if loadMore, let last = lastHistoryDocument {
             query = query.start(afterDocument: last)
         }

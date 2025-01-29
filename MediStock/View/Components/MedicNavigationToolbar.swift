@@ -20,7 +20,9 @@ struct MedicNavigationToolbar: ToolbarContent {
         }
         
         ToolbarItem(placement: .navigationBarLeading) {
-            Button(action: { dismiss() }) {
+            Button(action: {
+                print("Dismiss button pressed")
+                dismiss() }) {
                 HStack {
                     Image(systemName: "chevron.left")
                     Text(backText)

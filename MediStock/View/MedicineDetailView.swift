@@ -3,21 +3,47 @@ import SwiftUI
 
 
 struct MedicineDetailView: View {
+    let medicineId: String
+    let sourceView: String
+    
+    @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject private var navigationState: NavigationStateManager
     @EnvironmentObject var viewModel: MedicineStockViewModel
     @EnvironmentObject var session: SessionStore
     @State private var showingAddSheet = false
-    let medicineId: String
-    let sourceView: String
     
     var medicine: Medicine? {
         viewModel.medicines.first { $0.id == medicineId }
     }
-    
+
     var body: some View {
         List {
             if let medicine = medicine {
                 MedicineInformationSection(medicine: medicine)
                 StockManagementSection(medicine: medicine)
+
+                if medicine.stock == 0 {
+                    Section {
+                        Button(action: {
+//                            let isLastInAisle = viewModel.medicines.filter { $0.aisle == medicine.aisle }.count == 1
+                            
+                            viewModel.deleteMedicine(medicine, user: session.session?.uid ?? "")
+                            dismiss()
+//                            if isLastInAisle {
+//                                dismiss()
+//                            } else {
+//                                dismiss()
+//                            }
+                        }) {
+                            HStack {
+                                Image(systemName: "trash")
+                                Text("Delete Medicine")
+                            }
+                            .foregroundColor(.red)
+                        }
+                    }
+                }
+
                 if viewModel.isLoading {
                     Section(header: Text("History")) {
                         ProgressView()
@@ -38,9 +64,13 @@ struct MedicineDetailView: View {
         .onAppear {
             if let medicine = medicine {
                 viewModel.fetchHistory(for: medicine)
-            } else {
+            }
+            else {
                 viewModel.error = .medicineNotFound
             }
+        }
+        .sheet(isPresented: $showingAddSheet) {
+            AddMedicineSheet()
         }
         .alert(item: $viewModel.error) { error in
             Alert(
@@ -49,23 +79,20 @@ struct MedicineDetailView: View {
                 dismissButton: .default(Text("OK"))
             )
         }
-        .sheet(isPresented: $showingAddSheet) {
-            AddMedicineSheet()
-        }
     }
 }
 
 
 
-struct MedicineDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        let sampleMedicine = Medicine(id: "preview-id", name: "Sample", stock: 10, aisle: "Aisle 1")
-        let viewModel = MedicineStockViewModel()
-        // On ajoute le sample medicine dans le viewModel
-        viewModel.medicines.append(sampleMedicine)
-        
-        return NavigationView {
-            MedicineDetailView(medicineId: sampleMedicine.id!, sourceView: "SourceView")
-        }
-    }
-}
+//struct MedicineDetailView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        let sampleMedicine = Medicine(id: "preview-id", name: "Sample", stock: 10, aisle: "Aisle 1")
+//        let viewModel = MedicineStockViewModel()
+//        // On ajoute le sample medicine dans le viewModel
+//        viewModel.medicines.append(sampleMedicine)
+//        
+//        return NavigationView {
+//            MedicineDetailView(medicineId: sampleMedicine.id!, sourceView: "SourceView")
+//        }
+//    }
+//}

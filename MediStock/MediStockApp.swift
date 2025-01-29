@@ -12,7 +12,7 @@ import Firebase
 struct MediStockApp: App {
     @StateObject var sessionStore = SessionStore()
     @StateObject var medicineStore = MedicineStockViewModel()
-    
+        
     init() {
         FirebaseApp.configure()
         try? Auth.auth().signOut()

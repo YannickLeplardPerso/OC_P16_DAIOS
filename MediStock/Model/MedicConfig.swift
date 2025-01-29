@@ -10,10 +10,10 @@ import Foundation
 
 
 struct MedicConfig {
-    static let useFirebaseFiltering = true
+    static var useFirebaseFiltering = false
     
-    static let loadingMedicineStrategy: LoadingStrategy = .lazy
+    static var loadingMedicineStrategy: LoadingStrategy = .eager
     
-    static let loadingHistoryStrategy: LoadingStrategy = .lazy
-    static let pageSize = 2 //20
+    static var loadingHistoryStrategy: LoadingStrategy = .lazy
+    static var pageSize = 2 //20
 }

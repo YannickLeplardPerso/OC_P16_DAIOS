@@ -37,7 +37,7 @@ struct AisleListView: View {
             }
         }
         .onAppear {
-            viewModel.fetchMedicinesAndAisles()
+            viewModel.fetchMedicines()
         }
         .alert(item: $viewModel.error) { error in
             Alert(

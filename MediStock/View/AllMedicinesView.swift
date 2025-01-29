@@ -4,7 +4,7 @@ import SwiftUI
 
 struct AllMedicinesView: View {
     @EnvironmentObject var viewModel: MedicineStockViewModel
-
+    
     var body: some View {
         VStack(spacing: 0) {
             // Barre de recherche et tri
