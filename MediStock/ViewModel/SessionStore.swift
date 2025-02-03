@@ -1,6 +1,8 @@
 import Foundation
 import Firebase
 
+
+
 class SessionStore: ObservableObject {
     @Published var session: User?
     @Published var error: MedicError?

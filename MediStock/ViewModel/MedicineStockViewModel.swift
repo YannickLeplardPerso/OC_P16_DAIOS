@@ -207,7 +207,7 @@ class MedicineStockViewModel: ObservableObject {
     
     
     
-    func addMedicine(name: String, stockString: String, aisle: String, user: String) -> Medicine? {
+    func addMedicine(name: String, stockString: String, aisle: String, user: String) -> String? {
         guard !name.isEmpty else {
             self.error = .invalidMedicineName
             return nil
@@ -226,15 +226,13 @@ class MedicineStockViewModel: ObservableObject {
         let id = UUID().uuidString
         
         let medicine = Medicine(
-//            id: id,
-            id: nil, // temp
+            id: nil,
             name: name,
             stock: stock,
             aisle: aisle
         )
         
         do {
-//            let id = UUID().uuidString
             try db.collection("medicines").document(id).setData(from: medicine)
             
             addHistory(
@@ -243,7 +241,7 @@ class MedicineStockViewModel: ObservableObject {
                 medicineId: id,
                 details: "Added new medicine"
             )
-            return medicine
+            return id
         } catch {
             self.error = .addMedicineError
             return nil

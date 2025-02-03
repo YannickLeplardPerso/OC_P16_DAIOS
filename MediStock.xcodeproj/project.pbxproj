@@ -84,6 +84,7 @@
 		2A2068B42D4510DB008F80C0 /* MedicEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicEnum.swift; sourceTree = "<group>"; };
 		2A2068B62D4518C0008F80C0 /* MedicConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicConfig.swift; sourceTree = "<group>"; };
 		2A4B7E292D3BE865001A4621 /* MedicError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicError.swift; sourceTree = "<group>"; };
+		2A59A8C72D50D008000008D6 /* MediStock.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = MediStock.xctestplan; sourceTree = "<group>"; };
 		2AA088612D4A6F9E003E87DF /* MedicNavigationStateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicNavigationStateManager.swift; sourceTree = "<group>"; };
 		2AA747692D40135600595495 /* AddMedicineSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMedicineSheet.swift; sourceTree = "<group>"; };
 		2AED3C892D47F2FF0018D94D /* MedicAccessibilityIdentifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicAccessibilityIdentifiers.swift; sourceTree = "<group>"; };
@@ -210,6 +211,7 @@
 		53E0D88A2C06084700DE1134 = {
 			isa = PBXGroup;
 			children = (
+				2A59A8C72D50D008000008D6 /* MediStock.xctestplan */,
 				2AF463442D3AE25C00CBAD25 /* ignore */,
 				53E0D8952C06084700DE1134 /* MediStock */,
 				53E0D8A62C06084900DE1134 /* MediStockTests */,
@@ -605,7 +607,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = "15 dev";
+				CURRENT_PROJECT_VERSION = "16 dev";
 				DEVELOPMENT_ASSET_PATHS = "\"MediStock/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
@@ -639,7 +641,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = "15 dev";
+				CURRENT_PROJECT_VERSION = "16 dev";
 				DEVELOPMENT_ASSET_PATHS = "\"MediStock/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
@@ -677,6 +679,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = fr.leplard.MediStockTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG FIREBASE_EMULATOR";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -695,6 +698,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = fr.leplard.MediStockTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = FIREBASE_EMULATOR;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

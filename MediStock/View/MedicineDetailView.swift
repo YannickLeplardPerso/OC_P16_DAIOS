@@ -70,7 +70,11 @@ struct MedicineDetailView: View {
             }
         }
         .sheet(isPresented: $showingAddSheet) {
-            AddMedicineSheet()
+//            AddMedicineSheet()
+            AddMedicineSheet(fromAisle: medicine?.aisle) { newId in
+                print("Nouveau médicament créé avec l'ID: \(newId)")
+                print("Création depuis l'aisle: \(medicine?.aisle ?? "aucun")")
+            }
         }
         .alert(item: $viewModel.error) { error in
             Alert(
@@ -84,15 +88,15 @@ struct MedicineDetailView: View {
 
 
 
-//struct MedicineDetailView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        let sampleMedicine = Medicine(id: "preview-id", name: "Sample", stock: 10, aisle: "Aisle 1")
-//        let viewModel = MedicineStockViewModel()
-//        // On ajoute le sample medicine dans le viewModel
-//        viewModel.medicines.append(sampleMedicine)
-//        
-//        return NavigationView {
-//            MedicineDetailView(medicineId: sampleMedicine.id!, sourceView: "SourceView")
-//        }
-//    }
-//}
+struct MedicineDetailView_Previews: PreviewProvider {
+    static var previews: some View {
+        let sampleMedicine = Medicine(id: "preview-id", name: "Sample", stock: 10, aisle: "Aisle 1")
+        let viewModel = MedicineStockViewModel()
+        // On ajoute le sample medicine dans le viewModel
+        viewModel.medicines.append(sampleMedicine)
+        
+        return NavigationView {
+            MedicineDetailView(medicineId: sampleMedicine.id!, sourceView: "SourceView")
+        }
+    }
+}

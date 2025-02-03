@@ -1,4 +1,10 @@
 en cours
+build 16 dev
+- ajout d'un popup pour indiquer la bonne création d'un nouveau médicament
+- revue de la configuration de l’émulateur local Firebase et ajout dans MedicConfig d’un flag pour son utilisation 
+- création d’un plan de test personnalisé 
+- ajout des éléments d'accessibilité et aussi des identifiers pour les tests ui
+
 build 15 dev
 - installation d'un serveur local Firebase pour les tests, début d'implémentation des tests unitaires
 - correction bug : bouton suppression de médicament MedicineDetailView (qui avait disparu)
@@ -6,17 +12,6 @@ build 15 dev
 - amélioration : quand on ajoute un nouveau médicament à partir de la liste d'une Aisle, elle est présélectionnée comme destination par défaut. 
 - correction bug de navigation après création d'un nouveau médicament et navigation vers le détail (NavigationStack vs NavigationView)
 - amélioration : à la suppression d'un médicament on revient à la page précédente (Aisle ou All). Si c'est le dernier d'une Aisle dont on vient, on remonte à tab Aisles 
-
-
-
-
-il ya aussi un comportement qui n'est pas logique, mais à corriger uniquement si c'est simple : quand je crée un médicament dans une autre aisle, je ne suis pas au bon endroit à la fin. Pourrait-on facilement se retrouver dans la bonne aisle ? 
-
-bug : création nouveau medic dans detail... on reste sur detail précédent medic
-(idem ailleurs, on perd le fil)
-bug? : quand suppression dernier médicament d'un rayon, suppression du rayon, et on retourne dans rayon inexistant 
-
-
 
 build 14 dev
 -  implémentation du lazy loading pour medicine

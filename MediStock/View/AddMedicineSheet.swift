@@ -19,7 +19,9 @@ struct AddMedicineSheet: View {
     @State private var newAisle = ""
     @State private var isNewAisle = false
     
-    init(fromAisle: String? = nil) {
+    @State private var showingSuccessAlert = false
+    
+    init(fromAisle: String? = nil, onMedicineCreated: ((String) -> Void)? = nil) {
         self.fromAisle = fromAisle
         self._selectedAisle = State(initialValue: fromAisle ?? "")
         self._isNewAisle = State(initialValue: false) 
@@ -30,9 +32,11 @@ struct AddMedicineSheet: View {
             List {
                 Section(header: Text("Medicine Information")) {
                     TextField("Medicine name", text: $medicineName)
+                        .accessibilityIdentifier(AccessID.medicineName)
                         .autocorrectionDisabled(true)
                     
                     TextField("Initial stock", text: $initialStock)
+                        .accessibilityIdentifier(AccessID.initialStock)
                         .keyboardType(.numberPad)
                 }
                 
@@ -71,14 +75,21 @@ struct AddMedicineSheet: View {
                             stockString: initialStock,
                             aisle: isNewAisle ? newAisle : selectedAisle,
                             user: session.session?.uid ?? ""
-                        ) != nil {
-                            dismiss()
+                        ) != nil    {
+                            showingSuccessAlert = true
                         }
                     }
                     .disabled(medicineName.isEmpty || initialStock.isEmpty ||
                             (isNewAisle ? newAisle.isEmpty : selectedAisle.isEmpty))
                 }
             }
+        }
+        .alert("✅ Médicament ajouté", isPresented: $showingSuccessAlert) {
+            Button("OK", role: .cancel) {
+                dismiss()
+            }
+        } message: {
+            Text("\(medicineName) a été placé dans le rayon \(isNewAisle ? newAisle : selectedAisle)")
         }
         .alert(item: $viewModel.error) { error in
             Alert(
@@ -89,6 +100,89 @@ struct AddMedicineSheet: View {
         }
     }
 }
+
+//struct AddMedicineSheet: View {
+//    let fromAisle: String?
+//    
+//    @Environment(\.dismiss) private var dismiss
+//    @EnvironmentObject var viewModel: MedicineStockViewModel
+//    @EnvironmentObject var session: SessionStore
+//    @State private var medicineName = ""
+//    @State private var initialStock = ""
+//    @State private var selectedAisle = ""
+//    @State private var newAisle = ""
+//    @State private var isNewAisle = false
+//    
+//    init(fromAisle: String? = nil) {
+//        self.fromAisle = fromAisle
+//        self._selectedAisle = State(initialValue: fromAisle ?? "")
+//        self._isNewAisle = State(initialValue: false)
+//    }
+//    
+//    var body: some View {
+//        NavigationView {
+//            List {
+//                Section(header: Text("Medicine Information")) {
+//                    TextField("Medicine name", text: $medicineName)
+//                        .autocorrectionDisabled(true)
+//                    
+//                    TextField("Initial stock", text: $initialStock)
+//                        .keyboardType(.numberPad)
+//                }
+//                
+//                Section(header: Text("Aisle")) {
+//                    Picker("Select storage method", selection: $isNewAisle) {
+//                        Text("Existing aisle").tag(false)
+//                        Text("New aisle").tag(true)
+//                    }
+//                    .pickerStyle(SegmentedPickerStyle())
+//                    
+//                    if isNewAisle {
+//                        TextField("New aisle name", text: $newAisle)
+//                            .autocorrectionDisabled(true)
+//                    } else {
+//                        Picker("Select aisle", selection: $selectedAisle) {
+//                            Text("Select an aisle").tag("")
+//                            ForEach(viewModel.aisles, id: \.self) { aisle in
+//                                Text(aisle).tag(aisle)
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//            .navigationTitle("Add Medicine")
+//            .toolbar {
+//                ToolbarItem(placement: .cancellationAction) {
+//                    Button("Cancel") {
+//                        dismiss()
+//                    }
+//                }
+//                
+//                ToolbarItem(placement: .confirmationAction) {
+//                    Button("Add") {
+//                        if viewModel.addMedicine(
+//                            name: medicineName,
+//                            stockString: initialStock,
+//                            aisle: isNewAisle ? newAisle : selectedAisle,
+//                            user: session.session?.uid ?? ""
+//                        ) != nil {
+//                            dismiss()
+//                        }
+//                    }
+//                    .disabled(medicineName.isEmpty || initialStock.isEmpty ||
+//                            (isNewAisle ? newAisle.isEmpty : selectedAisle.isEmpty))
+//                }
+//            }
+//        }
+//        .alert(item: $viewModel.error) { error in
+//            Alert(
+//                title: Text("Error"),
+//                message: Text(error.localizedDescription),
+//                dismissButton: .default(Text("OK"))
+//            )
+//        }
+//    }
+//}
 
 
 

@@ -10,10 +10,22 @@ import Foundation
 
 
 enum AccessID {
+    static let appTitle = "app-title"
+//    static let appSubtitle = "app-subtitle"
+//    static let emulatorWarning = "emulator-warning"
     static let authEmail = "auth-email-textfield"
     static let authPassword = "auth-password-textfield"
     static let authSignIn = "auth-sign-in-button"
     static let authSignUp = "auth-sign-up-button"
+    static let searchMedicine = "search-medicine"
+    static let sortMedicines = "sort-medicines"
+    static let addMedicine = "add-medicine-button"
+    static let signOut = "sign-out-button"
+    static let medicineName = "medicine-name-textfield"
+    static let initialStock = "initial-stock-textfield"
+    static let decreaseStock = "decrease-stock-button"
+    static let increaseStock = "increase-stock-button"
+    static let currentStock = "current-stock-text"
 }
 
 

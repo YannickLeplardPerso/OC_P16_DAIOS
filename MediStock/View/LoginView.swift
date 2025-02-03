@@ -14,15 +14,28 @@ struct LoginView: View {
             Text("MediStock")
                 .font(.system(size: 40, weight: .bold))
                 .padding(.top, 60)
-            Text("Gestion de stock médical")
+//            Text("Gestion de stock médical")
+                .accessibilityIdentifier(AccessID.appTitle)
+                .accessibilityAddTraits(.isHeader)
+            Text("Medical inventory management")
                 .font(.subheadline)
                 .foregroundColor(.secondary)
                 .padding(.bottom, 40)
+            
+            if MedicConfig.useEmulatorFirebase {
+//                Text("⚠️ FIREBASE est en mode test\n(émulateur local) ⚠️")
+                Text("⚠️ FIREBASE is in test mode\n(local emulator) ⚠️")
+                    .multilineTextAlignment(.center)
+                    .foregroundColor(Color(UIColor.systemOrange))
+            }
             
             VStack {
                 TextField("Email", text: $email)
                     .textContentType(.emailAddress)
                     .autocapitalization(.none)
+                    .keyboardType(.emailAddress)
+                    .accessibilityHint("Enter your email address")
+                    .accessibilityIdentifier(AccessID.authEmail)
                     .padding()
                     .background(Color(.tertiarySystemBackground))
                     .cornerRadius(10)
@@ -32,6 +45,9 @@ struct LoginView: View {
                     )
                 
                 SecureField("Password", text: $password)
+                    .textContentType(.password)
+                    .accessibilityHint("Enter your password. Must be at least 10 characters with one uppercase letter, one lowercase letter, one number and one special character.")
+                    .accessibilityIdentifier(AccessID.authPassword)
                     .padding()
                     .background(Color(.tertiarySystemBackground))
                     .cornerRadius(10)
@@ -53,7 +69,11 @@ struct LoginView: View {
                         .frame(height: 50)
                         .background(Color.accentColor)
                         .cornerRadius(10)
+                    
+                        
                 }
+                .accessibilityHint("Sign in with your email and password")
+                .accessibilityIdentifier(AccessID.authSignIn)
                 
                 Button(action: {
                     session.signUp(email: email, password: password)
@@ -65,7 +85,10 @@ struct LoginView: View {
                         .frame(height: 50)
                         .background(Color.accentColor.opacity(0.1))
                         .cornerRadius(10)
+                        
                 }
+                .accessibilityHint("Sign up with email and password")
+                .accessibilityIdentifier(AccessID.authSignUp)
             }
             
             Spacer()

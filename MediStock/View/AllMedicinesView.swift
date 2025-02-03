@@ -13,6 +13,9 @@ struct AllMedicinesView: View {
                     Image(systemName: "magnifyingglass")
                         .foregroundColor(.secondary)
                     TextField("Search medicine", text: $viewModel.searchText)
+                        .accessibilityHint("Enter medicine name to filter list")
+                        .accessibilityIdentifier(AccessID.searchMedicine)
+                            
                 }
                 .padding()
                 .background(Color(.tertiarySystemBackground))
@@ -28,6 +31,7 @@ struct AllMedicinesView: View {
                     Text("Name").tag(SortOption.name)
                     Text("Stock").tag(SortOption.stock)
                 }
+                .accessibilityIdentifier(AccessID.sortMedicines)
                 .pickerStyle(SegmentedPickerStyle())
                 .padding(.horizontal)
             }

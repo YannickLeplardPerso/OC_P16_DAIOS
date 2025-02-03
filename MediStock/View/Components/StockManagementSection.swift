@@ -24,11 +24,14 @@ struct StockManagementSection: View {
                         .font(.title)
                         .foregroundColor(.red)
                 }
+                .accessibilityIdentifier(AccessID.decreaseStock)
+                .accessibilityLabel("Decrease stock by one")
                 .buttonStyle(BorderlessButtonStyle())
                 .disabled(medicine.stock == 0)
                 
                 Spacer()
                 Text("\(medicine.stock)")
+                    .accessibilityIdentifier(AccessID.currentStock)
                     .font(.headline)
                 Spacer()
                 
@@ -39,6 +42,8 @@ struct StockManagementSection: View {
                         .font(.title)
                         .foregroundColor(.green)
                 }
+                .accessibilityIdentifier(AccessID.increaseStock)
+                .accessibilityLabel("Increase stock by one")
                 .buttonStyle(BorderlessButtonStyle())
             }
             .padding(.vertical, 8)

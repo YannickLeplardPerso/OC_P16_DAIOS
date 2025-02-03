@@ -16,6 +16,8 @@ struct MedicActionsToolbar: ToolbarContent {
             Button(action: { showingAddSheet = true }) {
                 Image(systemName: "plus")
             }
+            .accessibilityIdentifier(AccessID.addMedicine)
+            .accessibilityLabel("Add new medicine")
         }
         
         ToolbarItem(placement: .navigationBarTrailing) {
@@ -23,6 +25,8 @@ struct MedicActionsToolbar: ToolbarContent {
                 Image(systemName: "rectangle.portrait.and.arrow.right")
                     .foregroundColor(.red)
             }
+            .accessibilityIdentifier(AccessID.signOut)
+            .accessibilityLabel("Sign out")
         }
     }
 }

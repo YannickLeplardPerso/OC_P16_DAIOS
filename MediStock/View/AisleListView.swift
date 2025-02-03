@@ -28,6 +28,7 @@ struct AisleListView: View {
                                         .foregroundColor(.secondary)
                                 }
                             }
+                            .accessibilityLabel("\(aisle) aisle, containing \(viewModel.medicines.filter { $0.aisle == aisle }.count) medicines")
                             .padding(.vertical, 8)
                         }
                     }

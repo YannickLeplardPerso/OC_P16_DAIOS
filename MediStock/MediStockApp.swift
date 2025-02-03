@@ -4,7 +4,6 @@
 //
 //  Created by Vincent Saluzzo on 28/05/2024.
 //
-
 import SwiftUI
 import Firebase
 
@@ -15,6 +14,16 @@ struct MediStockApp: App {
         
     init() {
         FirebaseApp.configure()
+        if MedicConfig.useEmulatorFirebase {
+//            print("✅ FIREBASE_EMULATOR est actif")
+            let settings = FirestoreSettings()
+            settings.host = "127.0.0.1:8090"
+            settings.isSSLEnabled = false
+            settings.cacheSettings = MemoryCacheSettings()
+            Firestore.firestore().settings = settings
+            Auth.auth().useEmulator(withHost: "127.0.0.1", port: 9099)
+        }
+
         try? Auth.auth().signOut()
     }
     
