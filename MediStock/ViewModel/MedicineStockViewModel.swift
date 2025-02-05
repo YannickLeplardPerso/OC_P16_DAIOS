@@ -312,6 +312,7 @@ class MedicineStockViewModel: ObservableObject {
             error = .invalidMedicineId
             return
         }
+        
         let newStock = medicine.stock + amount
         
         if newStock >= 0 {

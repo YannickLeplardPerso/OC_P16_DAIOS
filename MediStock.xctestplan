@@ -25,7 +25,6 @@
       }
     },
     {
-      "enabled" : false,
       "target" : {
         "containerPath" : "container:MediStock.xcodeproj",
         "identifier" : "53E0D8AC2C06084900DE1134",

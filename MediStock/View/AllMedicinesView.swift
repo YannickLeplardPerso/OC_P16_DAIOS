@@ -28,8 +28,11 @@ struct AllMedicinesView: View {
                 
                 Picker("Sort by", selection: $viewModel.sortOption) {
                     Text("None").tag(SortOption.none)
+                        .accessibilityIdentifier(AccessID.noneSort)
                     Text("Name").tag(SortOption.name)
+                        .accessibilityIdentifier(AccessID.nameSort)
                     Text("Stock").tag(SortOption.stock)
+                        .accessibilityIdentifier(AccessID.stockSort)
                 }
                 .accessibilityIdentifier(AccessID.sortMedicines)
                 .pickerStyle(SegmentedPickerStyle())

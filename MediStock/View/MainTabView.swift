@@ -14,12 +14,15 @@ struct MainTabView: View {
                     .tabItem {
                         Image(systemName: "list.dash")
                         Text("Aisles")
+                            .accessibilityIdentifier(AccessID.tabAisles)
                     }
-                
+                    
+
                 AllMedicinesView()
                     .tabItem {
                         Image(systemName: "square.grid.2x2")
                         Text("All Medicines")
+                            .accessibilityIdentifier(AccessID.tabAllMedicines)
                     }
             }
             .toolbar {

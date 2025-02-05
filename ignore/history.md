@@ -1,4 +1,15 @@
 en cours
+build 17 dev
+- refactorisation et correction/amélioration des tests unitaires (deux fichiers SessionStoreTests et MedicineStockViewModelTest, création de users et de medicines de test, valides et invalides...)
+- tests UI
+
+
+TODO
+- CI
+- tests unitaires en mode lazy/eager et gestion du paging pour les résultats
+- cf problème quand nom trop long dans bar navigation (tronquer ?)
+
+
 build 16 dev
 - ajout d'un popup pour indiquer la bonne création d'un nouveau médicament
 - revue de la configuration de l’émulateur local Firebase et ajout dans MedicConfig d’un flag pour son utilisation 

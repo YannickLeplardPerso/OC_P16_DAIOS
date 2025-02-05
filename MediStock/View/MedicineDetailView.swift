@@ -7,7 +7,7 @@ struct MedicineDetailView: View {
     let sourceView: String
     
     @Environment(\.dismiss) private var dismiss
-    @EnvironmentObject private var navigationState: NavigationStateManager
+//    @EnvironmentObject private var navigationState: NavigationStateManager
     @EnvironmentObject var viewModel: MedicineStockViewModel
     @EnvironmentObject var session: SessionStore
     @State private var showingAddSheet = false
@@ -25,15 +25,8 @@ struct MedicineDetailView: View {
                 if medicine.stock == 0 {
                     Section {
                         Button(action: {
-//                            let isLastInAisle = viewModel.medicines.filter { $0.aisle == medicine.aisle }.count == 1
-                            
                             viewModel.deleteMedicine(medicine, user: session.session?.uid ?? "")
                             dismiss()
-//                            if isLastInAisle {
-//                                dismiss()
-//                            } else {
-//                                dismiss()
-//                            }
                         }) {
                             HStack {
                                 Image(systemName: "trash")
@@ -70,11 +63,7 @@ struct MedicineDetailView: View {
             }
         }
         .sheet(isPresented: $showingAddSheet) {
-//            AddMedicineSheet()
-            AddMedicineSheet(fromAisle: medicine?.aisle) { newId in
-                print("Nouveau médicament créé avec l'ID: \(newId)")
-                print("Création depuis l'aisle: \(medicine?.aisle ?? "aucun")")
-            }
+            AddMedicineSheet(fromAisle: medicine?.aisle)
         }
         .alert(item: $viewModel.error) { error in
             Alert(

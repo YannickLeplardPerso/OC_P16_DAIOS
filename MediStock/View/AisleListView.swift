@@ -23,6 +23,7 @@ struct AisleListView: View {
                                 VStack(alignment: .leading, spacing: 4) {
                                     Text(aisle)
                                         .font(.headline)
+                                        .accessibilityIdentifier("\(AccessID.aisleRow)-\(aisle)")
                                     Text("\(viewModel.medicines.filter { $0.aisle == aisle }.count) medicines")
                                         .font(.subheadline)
                                         .foregroundColor(.secondary)

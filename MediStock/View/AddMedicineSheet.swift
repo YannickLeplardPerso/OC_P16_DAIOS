@@ -43,12 +43,16 @@ struct AddMedicineSheet: View {
                 Section(header: Text("Aisle")) {
                     Picker("Select storage method", selection: $isNewAisle) {
                         Text("Existing aisle").tag(false)
+                            .accessibilityIdentifier(AccessID.existingAisleButton)
                         Text("New aisle").tag(true)
+                            .accessibilityIdentifier(AccessID.newAisleButton)
                     }
+//                    .accessibilityIdentifier(AccessID.aisleTypePicker)
                     .pickerStyle(SegmentedPickerStyle())
                     
                     if isNewAisle {
                         TextField("New aisle name", text: $newAisle)
+                            .accessibilityIdentifier(AccessID.newAisle)
                             .autocorrectionDisabled(true)
                     } else {
                         Picker("Select aisle", selection: $selectedAisle) {
@@ -57,6 +61,7 @@ struct AddMedicineSheet: View {
                                 Text(aisle).tag(aisle)
                             }
                         }
+                        .accessibilityIdentifier(AccessID.existingAislePicker)
                     }
                 }
             }
@@ -79,6 +84,7 @@ struct AddMedicineSheet: View {
                             showingSuccessAlert = true
                         }
                     }
+                    .accessibilityIdentifier(AccessID.addMedicineConfirm)
                     .disabled(medicineName.isEmpty || initialStock.isEmpty ||
                             (isNewAisle ? newAisle.isEmpty : selectedAisle.isEmpty))
                 }

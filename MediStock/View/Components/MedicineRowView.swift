@@ -23,6 +23,7 @@ struct MedicineRowView: View {
             VStack(alignment: .leading, spacing: 4) {
                 Text(medicine.name)
                     .font(.headline)
+//                    .accessibilityIdentifier("\(AccessID.medicineRow)-\(medicine)")
                 
                 if showAisle {
                     HStack {
