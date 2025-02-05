@@ -16,6 +16,9 @@
 		2A0E35052D41986100FC7EA2 /* HistoryEntryRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0E35042D41986100FC7EA2 /* HistoryEntryRow.swift */; };
 		2A2068B52D4510DB008F80C0 /* MedicEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2068B42D4510DB008F80C0 /* MedicEnum.swift */; };
 		2A2068B72D4518C0008F80C0 /* MedicConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2068B62D4518C0008F80C0 /* MedicConfig.swift */; };
+		2A3D3B192D53B4D2003ED82A /* ci.yml in Resources */ = {isa = PBXBuildFile; fileRef = 2A3D3B162D53B4D2003ED82A /* ci.yml */; };
+		2A3D3B1A2D53B4D2003ED82A /* ci.yml in Resources */ = {isa = PBXBuildFile; fileRef = 2A3D3B162D53B4D2003ED82A /* ci.yml */; };
+		2A3D3B1B2D53B4D2003ED82A /* ci.yml in Resources */ = {isa = PBXBuildFile; fileRef = 2A3D3B162D53B4D2003ED82A /* ci.yml */; };
 		2A4B7E2A2D3BE865001A4621 /* MedicError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A4B7E292D3BE865001A4621 /* MedicError.swift */; };
 		2A8EF8052D5203F300C30BF0 /* MedicineStockViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8EF8042D5203F300C30BF0 /* MedicineStockViewModelTests.swift */; };
 		2A8EF8072D52041100C30BF0 /* SessionStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8EF8062D52041100C30BF0 /* SessionStoreTests.swift */; };
@@ -83,6 +86,7 @@
 		2A0E35042D41986100FC7EA2 /* HistoryEntryRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryEntryRow.swift; sourceTree = "<group>"; };
 		2A2068B42D4510DB008F80C0 /* MedicEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicEnum.swift; sourceTree = "<group>"; };
 		2A2068B62D4518C0008F80C0 /* MedicConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicConfig.swift; sourceTree = "<group>"; };
+		2A3D3B162D53B4D2003ED82A /* ci.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = ci.yml; sourceTree = "<group>"; };
 		2A4B7E292D3BE865001A4621 /* MedicError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicError.swift; sourceTree = "<group>"; };
 		2A59A8C72D50D008000008D6 /* MediStock.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = MediStock.xctestplan; sourceTree = "<group>"; };
 		2A8EF8042D5203F300C30BF0 /* MedicineStockViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineStockViewModelTests.swift; sourceTree = "<group>"; };
@@ -161,6 +165,22 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		2A3D3B172D53B4D2003ED82A /* workflows */ = {
+			isa = PBXGroup;
+			children = (
+				2A3D3B162D53B4D2003ED82A /* ci.yml */,
+			);
+			path = workflows;
+			sourceTree = "<group>";
+		};
+		2A3D3B182D53B4D2003ED82A /* .github */ = {
+			isa = PBXGroup;
+			children = (
+				2A3D3B172D53B4D2003ED82A /* workflows */,
+			);
+			path = .github;
+			sourceTree = "<group>";
+		};
 		2AF463442D3AE25C00CBAD25 /* ignore */ = {
 			isa = PBXGroup;
 			children = (
@@ -211,6 +231,7 @@
 		53E0D88A2C06084700DE1134 = {
 			isa = PBXGroup;
 			children = (
+				2A3D3B182D53B4D2003ED82A /* .github */,
 				2A59A8C72D50D008000008D6 /* MediStock.xctestplan */,
 				2AF463442D3AE25C00CBAD25 /* ignore */,
 				53E0D8952C06084700DE1134 /* MediStock */,
@@ -388,6 +409,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2A3D3B1B2D53B4D2003ED82A /* ci.yml in Resources */,
 				2AF463452D3AE25C00CBAD25 /* GoogleService-Info.plist in Resources */,
 				2AF463462D3AE25C00CBAD25 /* history.md in Resources */,
 				53E0D89E2C06084900DE1134 /* Preview Assets.xcassets in Resources */,
@@ -400,6 +422,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2AF463492D3AE25C00CBAD25 /* GoogleService-Info.plist in Resources */,
+				2A3D3B1A2D53B4D2003ED82A /* ci.yml in Resources */,
 				2AF4634A2D3AE25C00CBAD25 /* history.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -409,6 +432,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2AF463472D3AE25C00CBAD25 /* GoogleService-Info.plist in Resources */,
+				2A3D3B192D53B4D2003ED82A /* ci.yml in Resources */,
 				2AF463482D3AE25C00CBAD25 /* history.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
