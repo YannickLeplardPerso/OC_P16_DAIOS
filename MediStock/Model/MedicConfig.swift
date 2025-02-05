@@ -11,7 +11,7 @@ import Foundation
 
 struct MedicConfig {
     // Utilisation de l'émulateur local Firebase pour les tests
-    static var useEmulatorFirebase = false
+    static var useEmulatorFirebase = true
     
     static var useFirebaseFiltering = false
     

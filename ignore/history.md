@@ -1,13 +1,12 @@
 en cours
+build 19 dev
+- réécriture des tests unitaires avec l'ancien framework XCTest car Testing n'est pas supporté par github actions !
+
+correction et push du projet deux fois suite à des erreurs dans le fichier ci.yml
+(mauvais nom de projet et mauvais nom du scheme)
+
 build 18 dev
 - mise en place de l'intégration continue sur Github : création du fichier ci.yml dans le projet et d’une pull request sur github.
-
-TODO
-- CI
-- tests unitaires en mode lazy/eager et gestion du paging pour les résultats
-- cf problème quand nom trop long dans bar navigation (tronquer ?)
-
-
 
 build 17 dev
 - refactorisation et correction/amélioration des tests unitaires (deux fichiers SessionStoreTests et MedicineStockViewModelTest, création de users et de medicines de test, valides et invalides...)
