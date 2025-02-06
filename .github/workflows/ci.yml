@@ -15,6 +15,9 @@ jobs:
 
       - name: Select Xcode Version
         run: sudo xcode-select -s /Applications/Xcode.app
+      
+      - name: Inject Firebase config
+        run: echo "${{ secrets.FIREBASE_CONFIG }}" > GoogleService-Info.plist
 
       - name: Build and Test
         uses: sersoft-gmbh/xcodebuild-action@v3.2.0

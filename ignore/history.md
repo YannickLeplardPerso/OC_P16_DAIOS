@@ -1,4 +1,7 @@
 en cours
+build 20 dev
+- création d'un secret Github pour GoogleService-info.plist. Ajout d'une injection (du secret) dans ci.yml
+
 build 19 dev
 - réécriture des tests unitaires avec l'ancien framework XCTest car Testing n'est pas supporté par github actions !
 
