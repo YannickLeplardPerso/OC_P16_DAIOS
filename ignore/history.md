@@ -1,4 +1,11 @@
 en cours
+build 21 dev
+- ajout du path pour GoogleService-info.plist dans ci.yml
+
+
+
+
+
 build 20 dev
 - création d'un secret Github pour GoogleService-info.plist. Ajout d'une injection (du secret) dans ci.yml
 
