@@ -9,7 +9,6 @@ import XCTest
 
 
 
-
 struct UITestUser {
     static var randEmail: String {
         "test\(UUID().uuidString)@test.com"

@@ -1,8 +1,14 @@
 en cours
+build 23 dev
+- suppression du code (déjà commenté) des tests utilisant le framework Testing
+- refonte des tests unitaires pour supprimer les "Task.sleep" 
+
+
+
+
 build 22 dev
 - correction : texte en anglais pour l'alerte dans addMedicineSheet
 - ci : ajout de Node.js et Firebase Tools, démarrage des émulateurs Firebase
-
 
 build 21 dev
 - ajout du path pour GoogleService-info.plist dans ci.yml
