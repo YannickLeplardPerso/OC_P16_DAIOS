@@ -86,6 +86,7 @@
 		2A0E35042D41986100FC7EA2 /* HistoryEntryRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryEntryRow.swift; sourceTree = "<group>"; };
 		2A2068B42D4510DB008F80C0 /* MedicEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicEnum.swift; sourceTree = "<group>"; };
 		2A2068B62D4518C0008F80C0 /* MedicConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicConfig.swift; sourceTree = "<group>"; };
+		2A39D3012D54E31100E44F92 /* firebase.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = firebase.json; sourceTree = "<group>"; };
 		2A3D3B162D53B4D2003ED82A /* ci.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = ci.yml; sourceTree = "<group>"; };
 		2A4B7E292D3BE865001A4621 /* MedicError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicError.swift; sourceTree = "<group>"; };
 		2A59A8C72D50D008000008D6 /* MediStock.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = MediStock.xctestplan; sourceTree = "<group>"; };
@@ -231,6 +232,7 @@
 		53E0D88A2C06084700DE1134 = {
 			isa = PBXGroup;
 			children = (
+				2A39D3012D54E31100E44F92 /* firebase.json */,
 				2A3D3B182D53B4D2003ED82A /* .github */,
 				2A59A8C72D50D008000008D6 /* MediStock.xctestplan */,
 				2AF463442D3AE25C00CBAD25 /* ignore */,
@@ -631,7 +633,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = "21 dev";
+				CURRENT_PROJECT_VERSION = "22 dev";
 				DEVELOPMENT_ASSET_PATHS = "\"MediStock/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
@@ -665,7 +667,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = "21 dev";
+				CURRENT_PROJECT_VERSION = "22 dev";
 				DEVELOPMENT_ASSET_PATHS = "\"MediStock/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;

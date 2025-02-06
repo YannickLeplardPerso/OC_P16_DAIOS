@@ -38,7 +38,6 @@ class SessionStoreTests: XCTestCase {
    
    override func setUp() {
        super.setUp()
-       print("INITIALISATION DES TESTS DE SESSIONSTORE")
    }
    
    private func cleanupAuth() async throws {

@@ -7,7 +7,6 @@ struct MedicineDetailView: View {
     let sourceView: String
     
     @Environment(\.dismiss) private var dismiss
-//    @EnvironmentObject private var navigationState: NavigationStateManager
     @EnvironmentObject var viewModel: MedicineStockViewModel
     @EnvironmentObject var session: SessionStore
     @State private var showingAddSheet = false

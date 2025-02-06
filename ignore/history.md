@@ -1,10 +1,11 @@
 en cours
+build 22 dev
+- correction : texte en anglais pour l'alerte dans addMedicineSheet
+- ci : ajout de Node.js et Firebase Tools, démarrage des émulateurs Firebase
+
+
 build 21 dev
 - ajout du path pour GoogleService-info.plist dans ci.yml
-
-
-
-
 
 build 20 dev
 - création d'un secret Github pour GoogleService-info.plist. Ajout d'une injection (du secret) dans ci.yml

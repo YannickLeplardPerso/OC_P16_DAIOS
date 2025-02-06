@@ -47,7 +47,6 @@ struct AddMedicineSheet: View {
                         Text("New aisle").tag(true)
                             .accessibilityIdentifier(AccessID.newAisleButton)
                     }
-//                    .accessibilityIdentifier(AccessID.aisleTypePicker)
                     .pickerStyle(SegmentedPickerStyle())
                     
                     if isNewAisle {
@@ -90,12 +89,12 @@ struct AddMedicineSheet: View {
                 }
             }
         }
-        .alert("✅ Médicament ajouté", isPresented: $showingSuccessAlert) {
+        .alert("✅ Medicine added", isPresented: $showingSuccessAlert) {
             Button("OK", role: .cancel) {
                 dismiss()
             }
         } message: {
-            Text("\(medicineName) a été placé dans le rayon \(isNewAisle ? newAisle : selectedAisle)")
+            Text("\(medicineName) has been placed in aisle \(isNewAisle ? newAisle : selectedAisle)")
         }
         .alert(item: $viewModel.error) { error in
             Alert(

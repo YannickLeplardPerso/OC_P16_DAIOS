@@ -18,9 +18,27 @@ jobs:
       
       - name: Inject Firebase config
         run: echo "${{ secrets.FIREBASE_CONFIG }}" > ignore/GoogleService-Info.plist
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install Firebase Tools
+        run: npm install -g firebase-tools
+
+      - name: Start Firebase Emulators
+        run: |
+          firebase emulators:start --only auth,firestore &
+          sleep 10
+
 
       - name: Build and Test
         uses: sersoft-gmbh/xcodebuild-action@v3.2.0
+        env:
+          FIRESTORE_EMULATOR_HOST: localhost:8090
+          FIREBASE_AUTH_EMULATOR_HOST: localhost:9099
+          USE_FIREBASE_EMULATOR: true
         with:
           project: Medistock.xcodeproj
           scheme: MediStock
