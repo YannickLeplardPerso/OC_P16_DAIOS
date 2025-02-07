@@ -14,7 +14,6 @@ struct LoginView: View {
             Text("MediStock")
                 .font(.system(size: 40, weight: .bold))
                 .padding(.top, 60)
-//            Text("Gestion de stock médical")
                 .accessibilityIdentifier(AccessID.appTitle)
                 .accessibilityAddTraits(.isHeader)
             Text("Medical inventory management")
@@ -23,7 +22,6 @@ struct LoginView: View {
                 .padding(.bottom, 40)
             
             if MedicConfig.useEmulatorFirebase {
-//                Text("⚠️ FIREBASE est en mode test\n(émulateur local) ⚠️")
                 Text("⚠️ FIREBASE is in test mode\n(local emulator) ⚠️")
                     .multilineTextAlignment(.center)
                     .foregroundColor(Color(UIColor.systemOrange))
@@ -60,7 +58,9 @@ struct LoginView: View {
             
             VStack(spacing: 15) {
                 Button(action: {
-                    session.signIn(email: email, password: password)
+                    Task {
+                        await session.signIn(email: email, password: password)
+                    }
                 }) {
                     Text("Login")
                         .fontWeight(.semibold)
@@ -76,7 +76,10 @@ struct LoginView: View {
                 .accessibilityIdentifier(AccessID.authSignIn)
                 
                 Button(action: {
-                    session.signUp(email: email, password: password)
+                    Task {
+                        await session.signUp(email: email, password: password)
+                    }
+                    
                 }) {
                     Text("Sign Up")
                         .fontWeight(.semibold)

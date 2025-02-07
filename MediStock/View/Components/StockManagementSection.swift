@@ -18,7 +18,9 @@ struct StockManagementSection: View {
         Section(header: Text("Stock Management")) {
             HStack(spacing: 20) {
                 Button(action: {
-                    viewModel.updateStock(medicine, by: -1, user: session.session?.uid ?? "")
+                    Task {
+                        await viewModel.updateStock(medicine, by: -1, user: session.session?.uid ?? "")
+                    }
                 }) {
                     Image(systemName: "minus.circle.fill")
                         .font(.title)
@@ -36,7 +38,9 @@ struct StockManagementSection: View {
                 Spacer()
                 
                 Button(action: {
-                    viewModel.updateStock(medicine, by: 1, user: session.session?.uid ?? "")
+                    Task {
+                        await viewModel.updateStock(medicine, by: 1, user: session.session?.uid ?? "")
+                    }
                 }) {
                     Image(systemName: "plus.circle.fill")
                         .font(.title)

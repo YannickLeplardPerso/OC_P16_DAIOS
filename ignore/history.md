@@ -1,7 +1,8 @@
 en cours
 build 23 dev
 - suppression du code (déjà commenté) des tests utilisant le framework Testing
-- refonte des tests unitaires pour supprimer les "Task.sleep" 
+- modification des view models et des vues pour utiliser des fonctions "async/await"
+- refonte des tests unitaires 
 
 
 

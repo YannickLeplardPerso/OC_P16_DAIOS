@@ -38,8 +38,8 @@ struct AisleListView: View {
                 .background(Color(.systemGroupedBackground))
             }
         }
-        .onAppear {
-            viewModel.fetchMedicines()
+        .task {
+            await viewModel.fetchMedicines()
         }
         .alert(item: $viewModel.error) { error in
             Alert(

@@ -59,7 +59,9 @@ struct AllMedicinesView: View {
                                 ProgressView()
                             } else {
                                 Button("Load More") {
-                                    viewModel.fetchMedicines(loadMore: true)
+                                    Task {
+                                       await viewModel.fetchMedicines(loadMore: true)
+                                    }
                                 }
                             }
                             Spacer()
@@ -70,8 +72,8 @@ struct AllMedicinesView: View {
                 .listStyle(InsetGroupedListStyle())
             }
         }
-        .onAppear {
-            viewModel.fetchMedicines()
+        .task {
+            await viewModel.fetchMedicines()
         }
         .background(Color(.systemGroupedBackground))
         .alert(item: $viewModel.error) { error in

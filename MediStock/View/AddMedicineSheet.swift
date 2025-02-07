@@ -74,13 +74,16 @@ struct AddMedicineSheet: View {
                 
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Add") {
-                        if viewModel.addMedicine(
-                            name: medicineName,
-                            stockString: initialStock,
-                            aisle: isNewAisle ? newAisle : selectedAisle,
-                            user: session.session?.uid ?? ""
-                        ) != nil    {
-                            showingSuccessAlert = true
+                        Task {
+                            if await viewModel.addMedicine(
+                                name: medicineName,
+                                stockString: initialStock,
+                                aisle: isNewAisle ? newAisle : selectedAisle,
+                                user: session.session?.uid ?? ""
+                            ) != nil    {
+                                showingSuccessAlert = true
+                                await viewModel.fetchMedicines()
+                            }
                         }
                     }
                     .accessibilityIdentifier(AccessID.addMedicineConfirm)

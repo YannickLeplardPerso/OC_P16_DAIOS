@@ -10,6 +10,8 @@ import FirebaseCore
 import FirebaseAuth
 @testable import MediStock
 
+
+
 struct ValidTestUser {
     let email: String
     let password: String
@@ -29,17 +31,16 @@ struct InvalidTestUser {
     static let weakPassword = InvalidTestUser(email: "test@test.com", password: "weak")
 }
 
+
+
+@MainActor
 class SessionStoreTests: XCTestCase {
-    private let sessionStore = SessionStore()
-    private let maxAttempts = 10
-    private let pollingInterval = UInt64(100_000_000) // 100ms
+    private var sessionStore: SessionStore!
     
-    private func waitForCondition(_ condition: @escaping () -> Bool) async throws {
-        var attempts = 0
-        while !condition() && attempts < maxAttempts {
-            attempts += 1
-            try await Task.sleep(nanoseconds: pollingInterval)
-        }
+    override func setUp() async throws {
+        print("SETUP")
+        sessionStore = SessionStore()
+        try await cleanupAuth()
     }
     
     private func cleanupAuth() async throws {
@@ -52,154 +53,61 @@ class SessionStoreTests: XCTestCase {
     }
     
     func testSignUpValidCredentials() async throws {
-        try await cleanupAuth()
         let user = ValidTestUser.signup
-        sessionStore.signUp(email: user.email, password: user.password)
+        await sessionStore.signUp(email: user.email, password: user.password)
         
-        try await waitForCondition { self.sessionStore.session != nil }
-        XCTAssertNotNil(sessionStore.session, "La session devrait être créée")
-        XCTAssertNil(sessionStore.error, "Il ne devrait pas y avoir d'erreur")
+        let session = sessionStore.session
+        let error = sessionStore.error
+        
+        XCTAssertNotNil(session, "La session devrait être créée")
+        XCTAssertNil(error, "Il ne devrait pas y avoir d'erreur")
     }
     
     func testSignInValidCredentials() async throws {
-        try await cleanupAuth()
         let user = ValidTestUser.standard
         
         try await Auth.auth().createUser(withEmail: user.email, password: user.password)
-        try await waitForCondition { Auth.auth().currentUser != nil }
+        await sessionStore.signIn(email: user.email, password: user.password)
         
-        sessionStore.signIn(email: user.email, password: user.password)
-        try await waitForCondition { self.sessionStore.session != nil }
+        print(sessionStore.error ?? "nil")
         
-        XCTAssertNotNil(sessionStore.session, "La session devrait être créée")
-        XCTAssertNil(sessionStore.error, "Il ne devrait pas y avoir d'erreur")
+        let session = sessionStore.session
+        print(session ?? "nil")
+        let error = sessionStore.error
+        print(error ?? "nil")
+        
+        XCTAssertNotNil(session, "La session devrait être créée")
+        XCTAssertNil(error, "Il ne devrait pas y avoir d'erreur")
     }
     
     func testSignUpInvalidEmail() async throws {
-        try await cleanupAuth()
         let user = InvalidTestUser.emptyEmail
         
-        sessionStore.signUp(email: user.email, password: user.password)
-        try await waitForCondition { self.sessionStore.error != nil }
-        XCTAssertEqual(sessionStore.error, .invalidEmail)
+        await sessionStore.signUp(email: user.email, password: user.password)
+        let error = sessionStore.error
+        
+        XCTAssertEqual(error, .invalidEmail)
     }
     
     func testSignUpWeakPassword() async throws {
-        try await cleanupAuth()
         let user = InvalidTestUser.weakPassword
         
-        sessionStore.signUp(email: user.email, password: user.password)
-        try await waitForCondition { self.sessionStore.error != nil }
-        XCTAssertEqual(sessionStore.error, .weakPassword)
+        await sessionStore.signUp(email: user.email, password: user.password)
+        let error = sessionStore.error
+        
+        XCTAssertEqual(error, .weakPassword)
     }
     
     func testSignOut() async throws {
-        try await cleanupAuth()
         let user = ValidTestUser.signout
         
-        sessionStore.signUp(email: user.email, password: user.password)
-        try await waitForCondition { self.sessionStore.session != nil }
-        
+        await sessionStore.signUp(email: user.email, password: user.password)
         sessionStore.signOut()
-        XCTAssertNil(sessionStore.session)
-        XCTAssertNil(sessionStore.error)
+        
+        let session = sessionStore.session
+        let error = sessionStore.error
+        
+        XCTAssertNil(session)
+        XCTAssertNil(error)
     }
 }
-
-//import XCTest
-//import FirebaseCore
-//import FirebaseAuth
-//@testable import MediStock
-//
-//
-//
-//struct ValidTestUser {
-//   let email: String
-//   let password: String
-//   
-//   static let standard = ValidTestUser(email: "test@test.com", password: "Test123456!")
-//   static let signup = ValidTestUser(email: "test123@test.com", password: "Test234567!")
-//   static let signout = ValidTestUser(email: "testout@test.com", password: "Test345678!")
-//   
-//   static let all: [ValidTestUser] = [standard, signup, signout]
-//}
-//
-//struct InvalidTestUser {
-//   let email: String
-//   let password: String
-//   
-//   static let emptyEmail = InvalidTestUser(email: "", password: "Test123456!")
-//   static let weakPassword = InvalidTestUser(email: "test@test.com", password: "weak")
-//}
-//
-//
-//
-//class SessionStoreTests: XCTestCase {
-//   private let sessionStore = SessionStore()
-//   
-//   override func setUp() {
-//       super.setUp()
-//   }
-//   
-//   private func cleanupAuth() async throws {
-//       for user in ValidTestUser.all {
-//           _ = try? await Auth.auth().signIn(withEmail: user.email, password: user.password)
-//           if let currentUser = Auth.auth().currentUser {
-//               try await currentUser.delete()
-//           }
-//       }
-//       try await Task.sleep(nanoseconds: 500_000_000)
-//   }
-//   
-//   func testSignUpValidCredentials() async throws {
-//       try await cleanupAuth()
-//       let user = ValidTestUser.signup
-//       sessionStore.signUp(email: user.email, password: user.password)
-//       try await Task.sleep(nanoseconds: 500_000_000)
-//       
-//       XCTAssertNotNil(sessionStore.session, "La session devrait être créée")
-//       XCTAssertNil(sessionStore.error, "Il ne devrait pas y avoir d'erreur")
-//   }
-//   
-//   func testSignInValidCredentials() async throws {
-//       try await cleanupAuth()
-//       let user = ValidTestUser.standard
-//       
-//       try await Auth.auth().createUser(withEmail: user.email, password: user.password)
-//       try await Task.sleep(nanoseconds: 500_000_000)
-//       
-//       sessionStore.signIn(email: user.email, password: user.password)
-//       try await Task.sleep(nanoseconds: 500_000_000)
-//       
-//       XCTAssertNotNil(sessionStore.session, "La session devrait être créée")
-//       XCTAssertNil(sessionStore.error, "Il ne devrait pas y avoir d'erreur")
-//   }
-//   
-//   func testSignUpInvalidEmail() async throws {
-//       try await cleanupAuth()
-//       let user = InvalidTestUser.emptyEmail
-//       
-//       sessionStore.signUp(email: user.email, password: user.password)
-//       XCTAssertEqual(sessionStore.error, .invalidEmail)
-//   }
-//   
-//   func testSignUpWeakPassword() async throws {
-//       try await cleanupAuth()
-//       let user = InvalidTestUser.weakPassword
-//       
-//       sessionStore.signUp(email: user.email, password: user.password)
-//       XCTAssertEqual(sessionStore.error, .weakPassword)
-//   }
-//   
-//   func testSignOut() async throws {
-//       try await cleanupAuth()
-//       let user = ValidTestUser.signout
-//       
-//       sessionStore.signUp(email: user.email, password: user.password)
-//       try await Task.sleep(nanoseconds: 500_000_000)
-//       
-//       sessionStore.signOut()
-//       XCTAssertNil(sessionStore.session)
-//       XCTAssertNil(sessionStore.error)
-//   }
-//}

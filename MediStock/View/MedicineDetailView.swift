@@ -24,8 +24,10 @@ struct MedicineDetailView: View {
                 if medicine.stock == 0 {
                     Section {
                         Button(action: {
-                            viewModel.deleteMedicine(medicine, user: session.session?.uid ?? "")
-                            dismiss()
+                            Task {
+                                await viewModel.deleteMedicine(medicine, user: session.session?.uid ?? "")
+                                dismiss()
+                            }
                         }) {
                             HStack {
                                 Image(systemName: "trash")
@@ -53,9 +55,9 @@ struct MedicineDetailView: View {
             MedicNavigationToolbar(title: "Details", backText: sourceView)
             MedicActionsToolbar(showingAddSheet: $showingAddSheet)
         }
-        .onAppear {
+        .task {
             if let medicine = medicine {
-                viewModel.fetchHistory(for: medicine)
+                await viewModel.fetchHistory(for: medicine)
             }
             else {
                 viewModel.error = .medicineNotFound

@@ -31,7 +31,9 @@ struct HistorySection: View {
                         ProgressView()
                     } else {
                         Button("Load More") {
-                            viewModel.fetchHistory(for: medicine, loadMore: true)
+                            Task {
+                               await viewModel.fetchHistory(for: medicine, loadMore: true)
+                            }
                         }
                     }
                 }
