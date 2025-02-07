@@ -46,8 +46,16 @@ jobs:
           action: test
           result-bundle-path: 'testresults/test.xcresult'
         
+      - name: Debug - List files
+        run: |
+          echo "Content of current directory:"
+          ls -la
+          echo "Content of testresults directory:"
+          ls -la testresults/
+        if: always()
+        
       - name: Upload test results
         uses: kishikawakatsumi/xcresulttool@v1
         with:
-          path: testresults
+          path: testresults/test.xcresult
         if: success() || failure()
