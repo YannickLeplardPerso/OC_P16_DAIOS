@@ -1,11 +1,13 @@
 en cours
+build 24 dev
+- suppression du @MainActor pour les classes de tests : gestion au niveau des appels de fonctions et des valeurs
+- mise en commentaire de tous les tests sauf testAddMedicine pour investigation blocage ci
+
+
 build 23 dev
 - suppression du code (déjà commenté) des tests utilisant le framework Testing
 - modification des view models et des vues pour utiliser des fonctions "async/await"
 - refonte des tests unitaires 
-
-
-
 
 build 22 dev
 - correction : texte en anglais pour l'alerte dans addMedicineSheet
