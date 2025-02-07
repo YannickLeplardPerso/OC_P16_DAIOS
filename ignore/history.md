@@ -1,4 +1,7 @@
 en cours
+build 26 dev
+- ci.yml : suppression de l'étape d'upload de l'artefact 
+
 build 25 dev
 - correction cy.yml (result-bundle-path et path)
 
