@@ -44,10 +44,10 @@ jobs:
           scheme: MediStock
           destination: 'platform=iOS Simulator,name=iPhone 15'
           action: test
-          result-bundle-path: 'result.xcresult'
+          result-bundle-path: 'testresult'
         
       - name: Upload test results
         uses: kishikawakatsumi/xcresulttool@v1
         with:
-          path: result.xcresult
+          path: testresult
         if: success() || failure()
