@@ -1,4 +1,7 @@
 en cours
+build 27 dev
+- retour en arrière dans ci.yml et ajout name: TestResultsXCResult pour l'upload
+
 build 26 dev
 - ci.yml : suppression de l'étape d'upload de l'artefact 
 
