@@ -1,8 +1,10 @@
 en cours
+build 25 dev
+- correction cy.yml (result-bundle-path et path)
+
 build 24 dev
 - suppression du @MainActor pour les classes de tests : gestion au niveau des appels de fonctions et des valeurs
 - mise en commentaire de tous les tests sauf testAddMedicine pour investigation blocage ci
-
 
 build 23 dev
 - suppression du code (déjà commenté) des tests utilisant le framework Testing
