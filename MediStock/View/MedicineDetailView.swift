@@ -26,6 +26,7 @@ struct MedicineDetailView: View {
                         Button(action: {
                             Task {
                                 await viewModel.deleteMedicine(medicine, user: session.session?.uid ?? "")
+                                await viewModel.fetchMedicines()
                                 dismiss()
                             }
                         }) {

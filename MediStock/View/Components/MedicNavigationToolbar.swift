@@ -17,15 +17,17 @@ struct MedicNavigationToolbar: ToolbarContent {
     var body: some ToolbarContent {
         ToolbarItem(placement: .principal) {
             Text(title)
+                .lineLimit(1)
         }
         
         ToolbarItem(placement: .navigationBarLeading) {
             Button(action: {
-                print("Dismiss button pressed")
                 dismiss() }) {
                 HStack {
                     Image(systemName: "chevron.left")
                     Text(backText)
+                        .truncationMode(.tail)
+                        .frame(maxWidth: 100)
                 }
             }
         }

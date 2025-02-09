@@ -15,7 +15,6 @@ struct MediStockApp: App {
     init() {
         FirebaseApp.configure()
         if MedicConfig.useEmulatorFirebase {
-            print("✅ FIREBASE_EMULATOR est actif")
             let settings = FirestoreSettings()
             settings.host = "127.0.0.1:8090"
             settings.isSSLEnabled = false

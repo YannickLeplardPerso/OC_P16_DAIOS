@@ -1,4 +1,18 @@
 en cours
+build 28 dev2
+- suppression des "print" inutiles 
+- Dans MedicNavigationToolbar : on tronque le "back text" s'il est trop long, et on contraint le texte principal sur une ligne 
+- correction bug: tous les historiques étaient attibués à l'utilisateur courant et pas à celui qui les a fait.
+- correction bug : après suppression d'un médicament il continuait d'apparaitre dans l'aisle (mauvais rafraichissement de la liste)
+
+
+
+
+
+
+
+correction et push multiples du projet pour corriger les erreurs dans le fichier ci.yml
+
 build 27 dev
 - retour en arrière dans ci.yml et ajout name: TestResultsXCResult pour l'upload
 
