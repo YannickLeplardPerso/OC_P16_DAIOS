@@ -1,4 +1,9 @@
 en cours
+build 29 dev2
+- correction bugs
+
+
+
 build 28 dev2
 - suppression des "print" inutiles 
 - Dans MedicNavigationToolbar : on tronque le "back text" s'il est trop long, et on contraint le texte principal sur une ligne 
@@ -7,7 +12,7 @@ build 28 dev2
 
 
 
-
+=======================================================
 
 
 

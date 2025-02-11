@@ -22,7 +22,6 @@
 		2A4B7E2A2D3BE865001A4621 /* MedicError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A4B7E292D3BE865001A4621 /* MedicError.swift */; };
 		2A8EF8052D5203F300C30BF0 /* MedicineStockViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8EF8042D5203F300C30BF0 /* MedicineStockViewModelTests.swift */; };
 		2A8EF8072D52041100C30BF0 /* SessionStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8EF8062D52041100C30BF0 /* SessionStoreTests.swift */; };
-		2AA088622D4A6F9E003E87DF /* MedicNavigationStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA088612D4A6F9E003E87DF /* MedicNavigationStateManager.swift */; };
 		2AA7476A2D40135600595495 /* AddMedicineSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA747692D40135600595495 /* AddMedicineSheet.swift */; };
 		2AED3C8A2D47F2FF0018D94D /* MedicAccessibilityIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AED3C892D47F2FF0018D94D /* MedicAccessibilityIdentifiers.swift */; };
 		2AED3C8B2D47F2FF0018D94D /* MedicAccessibilityIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AED3C892D47F2FF0018D94D /* MedicAccessibilityIdentifiers.swift */; };
@@ -92,7 +91,6 @@
 		2A59A8C72D50D008000008D6 /* MediStock.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = MediStock.xctestplan; sourceTree = "<group>"; };
 		2A8EF8042D5203F300C30BF0 /* MedicineStockViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineStockViewModelTests.swift; sourceTree = "<group>"; };
 		2A8EF8062D52041100C30BF0 /* SessionStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionStoreTests.swift; sourceTree = "<group>"; };
-		2AA088612D4A6F9E003E87DF /* MedicNavigationStateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicNavigationStateManager.swift; sourceTree = "<group>"; };
 		2AA747692D40135600595495 /* AddMedicineSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMedicineSheet.swift; sourceTree = "<group>"; };
 		2AED3C892D47F2FF0018D94D /* MedicAccessibilityIdentifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicAccessibilityIdentifiers.swift; sourceTree = "<group>"; };
 		2AF463422D3AE25C00CBAD25 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -200,7 +198,6 @@
 				2A2068B42D4510DB008F80C0 /* MedicEnum.swift */,
 				2A2068B62D4518C0008F80C0 /* MedicConfig.swift */,
 				2AED3C892D47F2FF0018D94D /* MedicAccessibilityIdentifiers.swift */,
-				2AA088612D4A6F9E003E87DF /* MedicNavigationStateManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -452,7 +449,6 @@
 				53E0D8EA2C066F7A00DE1134 /* HistoryEntry.swift in Sources */,
 				2AED3C8A2D47F2FF0018D94D /* MedicAccessibilityIdentifiers.swift in Sources */,
 				53E0D8E02C0609B900DE1134 /* SessionStore.swift in Sources */,
-				2AA088622D4A6F9E003E87DF /* MedicNavigationStateManager.swift in Sources */,
 				53E0D8DE2C0609A800DE1134 /* MedicineStockViewModel.swift in Sources */,
 				2A2068B72D4518C0008F80C0 /* MedicConfig.swift in Sources */,
 				53E0D8DC2C06099C00DE1134 /* Medicine.swift in Sources */,
@@ -633,7 +629,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = "28 dev2";
+				CURRENT_PROJECT_VERSION = "29 dev2";
 				DEVELOPMENT_ASSET_PATHS = "\"MediStock/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
@@ -667,7 +663,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = "28 dev2";
+				CURRENT_PROJECT_VERSION = "29 dev2";
 				DEVELOPMENT_ASSET_PATHS = "\"MediStock/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;

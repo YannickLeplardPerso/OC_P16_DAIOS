@@ -8,7 +8,6 @@ class SessionStore: ObservableObject {
     @Published var session: User?
     @Published var error: MedicError?
 
-//    func signUp(email: String, password: String) {
     func signUp(email: String, password: String) async {
         guard !email.isEmpty else {
             self.error = .invalidEmail

@@ -27,10 +27,6 @@ final class MediStockUITests: XCTestCase {
         app.launch()
     }
     
-    //    override func tearDown() {
-    //        super.tearDown()
-    //    }
-    
     private func loginAsStandardUser() throws {
         let emailField = app.textFields[AccessID.authEmail]
         let passwordField = app.secureTextFields[AccessID.authPassword]

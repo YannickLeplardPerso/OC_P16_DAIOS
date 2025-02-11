@@ -20,7 +20,6 @@ struct HistoryEntryRow: View {
             Text(entry.details)
                 .font(.subheadline)
                 .foregroundColor(.secondary)
-//            Text(session.session?.email ?? entry.user)
             Text(entry.user)
                 .font(.caption)
                 .foregroundColor(.secondary)

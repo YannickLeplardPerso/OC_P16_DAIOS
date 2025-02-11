@@ -83,7 +83,6 @@ struct MedicineDetailView_Previews: PreviewProvider {
     static var previews: some View {
         let sampleMedicine = Medicine(id: "preview-id", name: "Sample", stock: 10, aisle: "Aisle 1")
         let viewModel = MedicineStockViewModel()
-        // On ajoute le sample medicine dans le viewModel
         viewModel.medicines.append(sampleMedicine)
         
         return NavigationView {

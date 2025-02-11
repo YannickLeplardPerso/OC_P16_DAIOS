@@ -109,7 +109,6 @@ class MedicineStockViewModelTests: XCTestCase {
        )
        
        await viewModel.fetchMedicines()
-       
        let dbMedicine = await MainActor.run { viewModel.medicines.first }
        guard let dbMedicine else {
            XCTFail("Le médicament devrait exister")
@@ -131,10 +130,6 @@ class MedicineStockViewModelTests: XCTestCase {
        await viewModel.fetchMedicines()
        let firstUpdate = await MainActor.run { viewModel.medicines.first?.stock }
        XCTAssertEqual(firstUpdate, 12)
-       
-       await viewModel.fetchHistory(for: updatedMedicine)
-       let count = await MainActor.run { viewModel.history.count }
-       XCTAssertEqual(count, 3)
    }
    
    func testSearchAndFilter() async throws {

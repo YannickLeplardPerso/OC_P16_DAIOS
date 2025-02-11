@@ -107,7 +107,6 @@ class MedicineStockViewModel: ObservableObject {
             try db.collection("medicines").document(id).setData(from: medicine)
             await addHistory(
                 action: "Added \(medicine.name)",
-//                user: user,
                 medicineId: id,
                 details: "Added new medicine"
             )
@@ -139,7 +138,6 @@ class MedicineStockViewModel: ObservableObject {
             
             await addHistory(
                 action: "\(amount > 0 ? "Increased" : "Decreased") stock of \(medicine.name) by \(amount)",
-//                user: user,
                 medicineId: id,
                 details: "Stock changed from \(oldStock) to \(newStock)"
             )
@@ -165,7 +163,6 @@ class MedicineStockViewModel: ObservableObject {
             
             await addHistory(
                 action: "Deleted \(medicine.name)",
-//                user: user,
                 medicineId: id,
                 details: "Medicine removed from inventory"
             )
@@ -185,9 +182,8 @@ class MedicineStockViewModel: ObservableObject {
             action: action,
             details: details
         )
-        
+           
         do {
-//            try db.collection("history").document(history.id ?? UUID().uuidString).setData(from: history)
             try db.collection("history").addDocument(from: history)
         } catch {
             self.error = .addHistoryError
@@ -202,33 +198,56 @@ class MedicineStockViewModel: ObservableObject {
         
         if !loadMore {
             history = []
+            lastHistoryDocument = nil
             isLoading = true
+        } else {
+            isLoadingMore = true
         }
         
-        let query = db.collection("history")
+        var query = db.collection("history")
             .whereField("medicineId", isEqualTo: medicineId)
             .order(by: "timestamp", descending: true)
-            .limit(to: MedicConfig.pageSize)
+            .limit(to: MedicConfig.pageSize + 1)
+        
+        if loadMore, let last = lastHistoryDocument {
+            query = query.start(afterDocument: last)
+        }
         
         do {
             let snapshot = try await query.getDocuments()
-            processHistorySnapshot(snapshot, error: nil)
+            lastHistoryDocument = snapshot.documents.count > MedicConfig.pageSize ? snapshot.documents[MedicConfig.pageSize - 1] : nil
+
+            _ = Array(snapshot.documents.prefix(MedicConfig.pageSize))
+            processHistorySnapshot(snapshot, error: nil, loadMore: loadMore)
+            
             isLoading = false
+            if loadMore {
+                isLoadingMore = false
+            } else {
+                isLoading = false
+            }
         } catch {
             self.error = .fetchHistoryError
             isLoading = false
+            isLoadingMore = false
         }
     }
     
-    private func processHistorySnapshot(_ snapshot: QuerySnapshot?, error: Error?) {
+    private func processHistorySnapshot(_ snapshot: QuerySnapshot?, error: Error?, loadMore: Bool = false) {
         guard error == nil else {
             self.error = .fetchHistoryError
             return
         }
         
-        history = snapshot?.documents.compactMap { document in
+        let entries = snapshot?.documents.prefix(MedicConfig.pageSize).compactMap { document in
             try? document.data(as: HistoryEntry.self)
         } ?? []
+        
+        if loadMore {
+            history.append(contentsOf: entries)
+        } else {
+            history = entries
+        }
     }
     
     private func processMedicinesSnapshot(_ snapshot: QuerySnapshot?, error: Error?, loadMore: Bool = false) {
